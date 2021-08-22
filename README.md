@@ -1,2 +1,2 @@
-# takahara-booiks.com
+# takahara-books.com
 HP html
