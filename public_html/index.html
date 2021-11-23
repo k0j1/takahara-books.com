@@ -34,6 +34,7 @@
     .right-side {position: fixed;right: 0;top: 0;transition: 0.3s;height: 100%;transform: translateX(280px);z-index: 4;}
     .right-side.active {transform: translatex(0);}
   }*/
+  input{display:none;}
 
   .main {flex-grow: 1;display: flex;flex-direction: column;background-color: #181d2f;}
 
@@ -62,7 +63,14 @@
     background-repeat: no-repeat;  background-size: 16px;  background-position: 25px 50%;}
   .search-bar input::placeholder {  color: #5c5d71;}
 
-  .main-container {  padding: 20px;  flex-grow: 1;  overflow: auto;  background-color: #24273b;}
+  .main-container {  padding: 20px;  flex-grow: 1;  overflow: auto;  background-color: #24273b; overflow-x: hidden;}
+
+  .info{display:none;}
+  .sns{display:none;}
+  .apps{display:none;}
+  .game{display:none;}
+  .vc{display:none;}
+  .nft{display:none;}
 
   .profile {  position: relative;  height: 40vh;  min-height: 250px;  max-height: 350px;  z-index: 1;}
   .profile-cover {  position: absolute;  top: 0;  left: 50;  width: 100%;  height: 100%;  object-fit: cover;  object-position: center;  border-radius: 4px;}
@@ -70,11 +78,41 @@
     background-image: url("https://images.unsplash.com/photo-1508247967583-7d982ea01526?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80");
     background-repeat: no-repeat;  background-size: cover;  background-position: center;}
   .profile-menu {  position: absolute;  bottom: 0;  padding-left: 200px;  background: #151728;  width: 100%;  display: flex;  border-radius: 0 0 4px 4px;}
-  .profile-menu-link {  padding: 20px 16px;  color: #5c5e6e;  transition: 0.3s;  cursor: pointer;}
-  .profile-menu-link.active, .profile-menu-link:hover {  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  .profile-menu-link {  padding: 20px 16px;  color: #5c5e6e;  transition: 0.1s;  cursor: pointer;}
+  .profile-menu-link.active, .profile-menu-link:hover {  color: #fff;  background-color: #8b8dae;}
   .profile-avatar {  position: absolute;  align-items: center;  display: flex;  z-index: 1;  bottom: 16px;  left: 24px;}
   .profile-img {  width: 150px;  height: 150px;  border-radius: 50%;  object-fit: cover;  border: 3px solid #151728;}
   .profile-name {  margin-left: 24px;  margin-bottom: 24px;  font-size: 22px;  color: #fff;  font-weight: 600;  font-family: "DM Sans", sans-serif;}
+  input#prof-info:checked ~ .profile .profile-menu label.prof-info{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-info:checked ~ .profile .profile-menu label.prof-info:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-sns:checked ~ .profile .profile-menu label.prof-sns{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-sns:checked ~ .profile .profile-menu label.prof-sns:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-apps:checked ~ .profile .profile-menu label.prof-apps{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-apps:checked ~ .profile .profile-menu label.prof-apps:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-game:checked ~ .profile .profile-menu label.prof-game{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-game:checked ~ .profile .profile-menu label.prof-game:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-vc:checked ~ .profile .profile-menu label.prof-vc{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-vc:checked ~ .profile .profile-menu label.prof-vc:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-nft:checked ~ .profile .profile-menu label.prof-nft{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-nft:checked ~ .profile .profile-menu label.prof-nft:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-info:checked ~ .timeline .timeline-left .info{display:block;}
+  input#prof-info:checked ~ .timeline .timeline-center .info{display:block;}
+  input#prof-info:checked ~ .timeline .timeline-right .info{display:block;}
+  input#prof-sns:checked ~ .timeline .timeline-left .sns{display:block;}
+  input#prof-sns:checked ~ .timeline .timeline-center .sns{display:block;}
+  input#prof-sns:checked ~ .timeline .timeline-right .sns{display:block;}
+  input#prof-apps:checked ~ .timeline .timeline-left .apps{display:block;}
+  input#prof-apps:checked ~ .timeline .timeline-center .apps{display:block;}
+  input#prof-apps:checked ~ .timeline .timeline-right .apps{display:block;}
+  input#prof-game:checked ~ .timeline .timeline-left .game{display:block;}
+  input#prof-game:checked ~ .timeline .timeline-center .game{display:block;}
+  input#prof-game:checked ~ .timeline .timeline-right .game{display:block;}
+  input#prof-vc:checked ~ .timeline .timeline-left .vc{display:block;}
+  input#prof-vc:checked ~ .timeline .timeline-center .vc{display:block;}
+  input#prof-vc:checked ~ .timeline .timeline-right .vc{display:block;}
+  input#prof-nft:checked ~ .timeline .timeline-left .nft{display:block;}
+  input#prof-nft:checked ~ .timeline .timeline-center .nft{display:block;}
+  input#prof-nft:checked ~ .timeline .timeline-right .nft{display:block;}
 
   .timeline {  display: flex;  padding-top: 20px;  position: relative;  z-index: 2;}
   .timeline-left {  width: 310px;  flex-shrink: 0;}
@@ -86,7 +124,7 @@
     .timeline-center { width: 100%; padding-left: 0;  margin-bottom: 20px;}
     .timeline-left {  width: 100%;  }
   }
-
+  
   .box {background-color: #151728;  border-radius: 4px;}
   .intro {  padding: 20px;}
   .intro-title {  font-family: "DM Sans", sans-serif;  color: #5c5e6e;  font-weight: 600;  font-size: 18px;  display: flex;  align-items: center;  margin-bottom: 20px;}
@@ -96,7 +134,7 @@
   .info-item {  display: flex;  color: #c3c5d5;}
   .info-item + .info-item {  margin-top: 14px;}
   .info-item a {  margin-left: 6px;  color: #1771d6;  text-decoration: none;}
-  .info-item svg {  width: 16px;  margin-right: 10px;}
+  .info-item svg {  width: 24px;  margin-top:-4px; margin-right: 10px;}
 
   .event {  position: relative;  margin-top: 20px;  padding: 10px;}
   .event-wrapper {  position: relative;}
@@ -219,7 +257,7 @@
 
   <script>
   window.console = window.console || function(t) {};
-</script>
+　</script>
 
   
   
@@ -228,6 +266,7 @@
     window.parent.postMessage("resize", "*");
   }
   </script>
+
 
 
 </head>
@@ -251,20 +290,13 @@
       </svg>
     </div>
     <div class="logo">takahara-books</div>
+    <!--
     <span class="follow-text">
-      <!-- Twitter Icon -->
-      <a href="https://twitter.com/k0j1_t" target="_blank">
-        <svg viewBox="30 30 330 330" stroke="currentColor" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1" width="32px">
-          <path d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"/>
-        </svg>
-      </a>
-      <!-- Instagram Icon -->
       <a href="https://www.instagram.com/k0j1_t/" target="_blank">
         <svg viewBox="0 0 503.84 503.84" width="32px">
           <path d="M256,49.47c67.27,0,75.23.26,101.8,1.47,24.56,1.12,37.9,5.22,46.78,8.67a78,78,0,0,1,29,18.85,78,78,0,0,1,18.85,29c3.45,8.88,7.55,22.22,8.67,46.78,1.21,26.57,1.47,34.53,1.47,101.8s-.26,75.23-1.47,101.8c-1.12,24.56-5.22,37.9-8.67,46.78a83.51,83.51,0,0,1-47.81,47.81c-8.88,3.45-22.22,7.55-46.78,8.67-26.56,1.21-34.53,1.47-101.8,1.47s-75.24-.26-101.8-1.47c-24.56-1.12-37.9-5.22-46.78-8.67a78,78,0,0,1-29-18.85,78,78,0,0,1-18.85-29c-3.45-8.88-7.55-22.22-8.67-46.78-1.21-26.57-1.47-34.53-1.47-101.8s.26-75.23,1.47-101.8c1.12-24.56,5.22-37.9,8.67-46.78a78,78,0,0,1,18.85-29,78,78,0,0,1,29-18.85c8.88-3.45,22.22-7.55,46.78-8.67,26.57-1.21,34.53-1.47,101.8-1.47m0-45.39c-68.42,0-77,.29-103.87,1.52S107,11.08,91,17.3A123.68,123.68,0,0,0,46.36,46.36,123.68,123.68,0,0,0,17.3,91c-6.22,16-10.48,34.34-11.7,61.15S4.08,187.58,4.08,256s.29,77,1.52,103.87S11.08,405,17.3,421a123.68,123.68,0,0,0,29.06,44.62A123.52,123.52,0,0,0,91,494.69c16,6.23,34.34,10.49,61.15,11.71s35.45,1.52,103.87,1.52,77-.29,103.87-1.52S405,500.92,421,494.69A128.74,128.74,0,0,0,494.69,421c6.23-16,10.49-34.34,11.71-61.15s1.52-35.45,1.52-103.87-.29-77-1.52-103.87S500.92,107,494.69,91a123.52,123.52,0,0,0-29.05-44.62A123.68,123.68,0,0,0,421,17.3c-16-6.22-34.34-10.48-61.15-11.7S324.42,4.08,256,4.08Z" transform="translate(-4.08 -4.08)"/><path d="M256,126.64A129.36,129.36,0,1,0,385.36,256,129.35,129.35,0,0,0,256,126.64ZM256,340a84,84,0,1,1,84-84A84,84,0,0,1,256,340Z" transform="translate(-4.08 -4.08)"/><circle cx="386.4" cy="117.44" r="30.23"/>
         </svg>
       </a>
-      <!-- Line Icon -->
       <a href="https://timeline.line.me/user/_dZxtv5XnCaz5Rn6Fh1tZnPi6UzsZymdFNZrFKzU/" target="_blank">
         <svg stroke-width="4" stroke-linecap="round" stroke-linejoin="round" viewBox="15 15 93 93" width="32px">
           <path class="cls-2" d="M103.5,54.72c0-19.55-19.6-35.45-43.7-35.45S16.11,35.17,16.11,54.72c0,17.53,15.55,32.21,36.54,35,1.43.31,3.36.94,3.85,2.16a8.93,8.93,0,0,1,.14,4L56,99.55c-.19,1.1-.88,4.32,3.78,2.35S85,87.09,94.13,76.54h0c6.33-7,9.37-14,9.37-21.82"/>
@@ -273,13 +305,8 @@
           <path class="cls-1" d="M43.54,61.25H35.21V46.13a.85.85,0,0,0-.85-.85H31.3a.85.85,0,0,0-.85.85v19h0a.87.87,0,0,0,.23.59h0v0a.87.87,0,0,0,.59.23H43.54a.85.85,0,0,0,.85-.85V62.1a.85.85,0,0,0-.85-.85" fill="#fff"/><path class="cls-1" d="M89,50a.85.85,0,0,0,.85-.85V46.13a.85.85,0,0,0-.85-.85H76.7a.85.85,0,0,0-.59.24h0v0a.83.83,0,0,0-.24.59h0v19h0a.83.83,0,0,0,.24.59h0a.85.85,0,0,0,.59.24H89a.85.85,0,0,0,.85-.85V62.1a.85.85,0,0,0-.85-.85H80.62V58H89a.85.85,0,0,0,.85-.85V54.11a.85.85,0,0,0-.85-.85H80.62V50Z" fill="#fff"/></g>
         </svg>
       </a>
-      <!-- GitHub Icon -->
-      <a href="https://github.com/k0j1" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" focusable="false" viewBox="0 0 12 12">
-          <path fill="currentColor" d="M6 0a6 6 0 110 12A6 6 0 016 0zm0 .98C3.243.98 1 3.223 1 6a5.02 5.02 0 003.437 4.77.594.594 0 00.045.005c.203.01.279-.129.279-.25l-.007-.854c-1.39.303-1.684-.674-1.684-.674-.227-.58-.555-.734-.555-.734-.454-.312.034-.306.034-.306.365.026.604.288.708.43l.058.088c.446.767 1.17.546 1.455.418.046-.325.174-.546.317-.672-1.11-.127-2.277-.558-2.277-2.482 0-.548.195-.996.515-1.348l-.03-.085c-.064-.203-.152-.658.079-1.244l.04-.007c.124-.016.548-.013 1.335.522A4.77 4.77 0 016 3.408c.425.002.853.058 1.252.17.955-.65 1.374-.516 1.374-.516.272.692.1 1.202.05 1.33.32.35.513.799.513 1.347 0 1.93-1.169 2.354-2.283 2.478.18.155.34.462.34.93l-.006 1.378c0 .13.085.282.323.245A5.02 5.02 0 0011 6C11 3.223 8.757.98 6 .98z"/>
-        </svg>
-      </a>
     </span>
+    -->
 
     <div class="side-wrapper">
       <div class="side-title">MENU</div>
@@ -298,9 +325,9 @@
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
           </svg>
-          お知らせ
+          お知らせ（準備中）
         </a>
-        <a href="#">
+        <a href="https://www.takahara-books.com/Android/">
           <!-- Markerアイコン -->
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -313,7 +340,7 @@
             <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
             <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
           </svg>
-          ゲーム
+          ゲーム（準備中）
         </a>
         <a href="#">
           <!-- Galleryアイコン -->
@@ -322,7 +349,7 @@
             <circle cx="8.5" cy="8.5" r="1.5" />
             <path d="M21 15l-5-5L5 21" />
           </svg>
-          Galery
+          Galery（準備中）
         </a>
         <a href="#">
           <!-- Calendarアイコン -->
@@ -330,7 +357,7 @@
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
             <path d="M16 2v4M8 2v4M3 10h18" />
           </svg>
-          Crypt
+          Crypt（準備中）
         </a>
       </div>
     </div>
@@ -346,6 +373,13 @@
     </div>
     <!-- メインコンテンツ -->  
     <div class="main-container">
+      <input type="checkbox" id="prof-info" name="profile-menu" value="1" checked>
+      <input type="checkbox" id="prof-sns"  name="profile-menu" value="2" checked>
+      <input type="checkbox" id="prof-apps"  name="profile-menu" value="3" checked>
+      <input type="checkbox" id="prof-game"  name="profile-menu" value="4" checked>
+      <input type="checkbox" id="prof-vc"  name="profile-menu" value="5" checked>
+      <input type="checkbox" id="prof-nft"  name="profile-menu" value="6" checked>
+        
       <!-- プロフィール -->
       <div class="profile">
         <div class="profile-avatar">
@@ -353,18 +387,20 @@
         </div>
         <img src="https://www.takahara-books.com/Image/profile_cover.png" alt="" class="profile-cover">
         <div class="profile-menu">
-          <a class="profile-menu-link active">概要</a>
-          <a class="profile-menu-link">アプリ</a>
-          <a class="profile-menu-link">ゲーム</a>
-          <a class="profile-menu-link">NFT</a>
-          <a class="profile-menu-link">SNS</a>
+          <label for="prof-info" class="profile-menu-link prof-info">Info</label>
+          <label for="prof-sns" class="profile-menu-link prof-sns">SNS</label>
+          <label for="prof-apps" class="profile-menu-link prof-apps">アプリ</label>
+          <label for="prof-game" class="profile-menu-link prof-game">ゲーム</label>
+          <label for="prof-vc" class="profile-menu-link prof-vc">仮想通貨</label>
+          <label for="prof-nft" class="profile-menu-link prof-nft">NFT</label>
+
         </div>
       </div>
-      
+
       <!-- 概要 -->
       <div class="timeline">
         <div class="timeline-left">
-          <div class="intro box">
+          <div class="intro box info">
             <!-- サイトリンク -->
             <div class="intro-title">
               サイトリンク
@@ -372,7 +408,23 @@
             </div>
             <div class="info">
               <div class="info-item">
-                <a href="https://play.google.com/store/apps/dev?id=6971176554699886046">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 291.32 291.32" style="enable-background:new 0 0 291.32 291.32;" xml:space="preserve" width="24" height="24">
+                <path style="fill:#2B414D;" d="M145.66,0C65.219,0,0,65.219,0,145.66c0,80.45,65.219,145.66,145.66,145.66
+                	s145.66-65.21,145.66-145.66C291.319,65.219,226.1,0,145.66,0z M186.462,256.625c-0.838-11.398-1.775-25.518-1.83-31.235
+                	c-0.364-4.388-0.838-15.549-11.434-22.677c42.068-3.523,62.087-26.774,63.526-57.499c1.202-17.497-5.754-32.883-18.107-45.3
+                	c0.628-13.282-0.401-29.023-1.256-35.941c-9.486-2.731-31.608,8.949-37.79,13.947c-13.037-5.062-44.945-6.837-64.336,0
+                	c-13.747-9.668-29.396-15.64-37.926-13.974c-7.875,17.452-2.813,33.948-1.275,35.914c-10.142,9.268-24.289,20.675-20.447,44.572
+                	c6.163,35.04,30.816,53.94,70.508,58.564c-8.466,1.73-9.896,8.048-10.606,10.788c-26.656,10.997-34.275-6.791-37.644-11.425
+                	c-11.188-13.847-21.23-9.832-21.849-9.614c-0.601,0.218-1.056,1.092-0.992,1.511c0.564,2.986,6.655,6.018,6.955,6.263
+                	c8.257,6.154,11.316,17.27,13.2,20.438c11.844,19.473,39.374,11.398,39.638,11.562c0.018,1.702-0.191,16.032-0.355,27.184
+                	C64.245,245.992,27.311,200.2,27.311,145.66c0-65.365,52.984-118.348,118.348-118.348S264.008,80.295,264.008,145.66
+                	C264.008,196.668,231.69,239.992,186.462,256.625z"/>
+                </svg>
+                <a href="https://github.com/k0j1">
+                Git Hub
+                </a>
+              </div>
+              <div class="info-item">
                 <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 408 466.9" width="24" height="24">
                     <style>.st0{fill:url(#SVGID_1_)}.st1{fill:url(#SVGID_2_)}.st2{fill:url(#SVGID_3_)}.st3{fill:url(#SVGID_4_)}</style>
                     <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" y1="112.094" x2="261.746" y2="112.094">
@@ -392,42 +444,65 @@
                     </linearGradient>
                     <path class="st3" d="M1.7 402.3c.2 33.3.3 54.6.3 54.6 0 3.6 1.9 6.9 5 8.6 3.1 1.8 6.9 1.8 10 0l255.3-148.9-92.4-92.4L1.7 402.3z"/>
                 </svg>
+                <a href="https://play.google.com/store/apps/dev?id=6971176554699886046">
+                Google Play ストア
                 </a>
-                Google Play ストア <a href="https://play.google.com/store/apps/dev?id=6971176554699886046">k0j1</a>
               </div>
+                <!-- Twitter -->
               <div class="info-item">
-                <a href="https://github.com/k0j1">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 291.32 291.32" style="enable-background:new 0 0 291.32 291.32;" xml:space="preserve" width="24" height="24">
-                <path style="fill:#2B414D;" d="M145.66,0C65.219,0,0,65.219,0,145.66c0,80.45,65.219,145.66,145.66,145.66
-                	s145.66-65.21,145.66-145.66C291.319,65.219,226.1,0,145.66,0z M186.462,256.625c-0.838-11.398-1.775-25.518-1.83-31.235
-                	c-0.364-4.388-0.838-15.549-11.434-22.677c42.068-3.523,62.087-26.774,63.526-57.499c1.202-17.497-5.754-32.883-18.107-45.3
-                	c0.628-13.282-0.401-29.023-1.256-35.941c-9.486-2.731-31.608,8.949-37.79,13.947c-13.037-5.062-44.945-6.837-64.336,0
-                	c-13.747-9.668-29.396-15.64-37.926-13.974c-7.875,17.452-2.813,33.948-1.275,35.914c-10.142,9.268-24.289,20.675-20.447,44.572
-                	c6.163,35.04,30.816,53.94,70.508,58.564c-8.466,1.73-9.896,8.048-10.606,10.788c-26.656,10.997-34.275-6.791-37.644-11.425
-                	c-11.188-13.847-21.23-9.832-21.849-9.614c-0.601,0.218-1.056,1.092-0.992,1.511c0.564,2.986,6.655,6.018,6.955,6.263
-                	c8.257,6.154,11.316,17.27,13.2,20.438c11.844,19.473,39.374,11.398,39.638,11.562c0.018,1.702-0.191,16.032-0.355,27.184
-                	C64.245,245.992,27.311,200.2,27.311,145.66c0-65.365,52.984-118.348,118.348-118.348S264.008,80.295,264.008,145.66
-                	C264.008,196.668,231.69,239.992,186.462,256.625z"/>
+                <!-- Twitter Icon -->
+                <svg viewBox="80 80 250 220" stroke="currentColor" stroke-width="0" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1" width="24px">
+                  <path fill="#42a3f4" d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"/>
                 </svg>
-                </a>
-                Git Hub <a href="https://github.com/k0j1">k0j1</a>
+                <a href="https://twitter.com/k0j1_t" target="_blank">
+            	Twitter
+            	</a>
+              </div>
+              <!-- Instagram -->
+              <div class="info-item">
+                <!-- Instagram Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 100 100">
+                    <g transform="translate(-271 -334)">
+                        <rect width="100" height="100" transform="translate(271 334)" fill="none"/>
+                    <g transform="translate(267.6 329.2)">
+                        <path style="fill:#FFFFFF;" d="M41.206,16.7A25.806,25.806,0,1,0,67.013,42.506,25.856,25.856,0,0,0,41.206,16.7Zm0,42.339A16.532,16.532,0,1,1,57.739,42.506,16.607,16.607,0,0,1,41.206,59.039Z" transform="translate(12.194 12.092)"/>
+                        <circle style="fill:#FFFFFF;" cx="5.847" cy="5.847" r="5.847" transform="translate(74.368 22.34)"/>
+                        <path style="fill:#FFFFFF;" d="M95.335,13.066C90.094,7.623,82.634,4.8,74.166,4.8H32.634C15.094,4.8,3.4,16.494,3.4,34.034V75.365c0,8.669,2.823,16.129,8.468,21.573,5.444,5.242,12.7,7.863,20.968,7.863H73.965c8.669,0,15.927-2.823,21.169-7.863,5.444-5.242,8.266-12.7,8.266-21.371V34.034C103.4,25.566,100.577,18.308,95.335,13.066Zm-.806,62.5c0,6.25-2.218,11.29-5.847,14.718s-8.669,5.242-14.718,5.242H32.835c-6.048,0-11.089-1.815-14.718-5.242-3.629-3.629-5.444-8.669-5.444-14.919V34.034c0-6.048,1.815-11.089,5.444-14.718,3.427-3.427,8.669-5.242,14.718-5.242H74.368c6.048,0,11.089,1.815,14.718,5.444a20.8,20.8,0,0,1,5.444,14.516V75.566Z" transform="translate(0 0)"/>
+                    </g></g>
+                </svg>
+                <a href="https://www.instagram.com/k0j1_game/" target="_blank">
+            	Instagram
+            	</a>
+              </div>
+              <!-- Opensea -->
+              <div class="info-item">
+                <!-- Opensea Icon -->
+                <svg width="24px" height="24px" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M90 45C90 69.8514 69.8514 90 45 90C20.1486 90 0 69.8514 0 45C0 20.1486 20.1486 0 45 0C69.8566 0 90 20.1486 90 45Z" fill="#2081E2"/>
+                    <path d="M22.2011 46.512L22.3953 46.2069L34.1016 27.8939C34.2726 27.6257 34.6749 27.6535 34.8043 27.9447C36.76 32.3277 38.4475 37.7786 37.6569 41.1721C37.3194 42.5683 36.3948 44.4593 35.3545 46.2069C35.2204 46.4612 35.0725 46.7109 34.9153 46.9513C34.8413 47.0622 34.7165 47.127 34.5824 47.127H22.5432C22.2196 47.127 22.0301 46.7756 22.2011 46.512Z" fill="white"/>
+                    <path d="M74.38 49.9149V52.8137C74.38 52.9801 74.2783 53.1281 74.1304 53.1928C73.2242 53.5812 70.1219 55.0052 68.832 56.799C65.5402 61.3807 63.0251 67.932 57.4031 67.932H33.949C25.6362 67.932 18.9 61.1727 18.9 52.8322V52.564C18.9 52.3421 19.0803 52.1618 19.3023 52.1618H32.377C32.6359 52.1618 32.8255 52.4022 32.8024 52.6565C32.7099 53.5072 32.8671 54.3764 33.2693 55.167C34.0461 56.7435 35.655 57.7283 37.3934 57.7283H43.866V52.675H37.4673C37.1391 52.675 36.9449 52.2959 37.1345 52.0277C37.2038 51.9214 37.2824 51.8104 37.3656 51.6856C37.9713 50.8257 38.8358 49.4895 39.6958 47.9684C40.2829 46.9421 40.8516 45.8463 41.3093 44.746C41.4018 44.5472 41.4758 44.3438 41.5497 44.1449C41.6746 43.7936 41.804 43.4653 41.8965 43.1371C41.9889 42.8597 42.0629 42.5684 42.1369 42.2956C42.3542 41.3617 42.4467 40.3723 42.4467 39.3459C42.4467 38.9437 42.4282 38.523 42.3912 38.1207C42.3727 37.6815 42.3172 37.2423 42.2617 36.8031C42.2247 36.4147 42.1554 36.031 42.0814 35.6288C41.9889 35.0416 41.8595 34.4591 41.7115 33.8719L41.6607 33.65C41.5497 33.2478 41.4573 32.864 41.3278 32.4618C40.9626 31.1996 40.5418 29.9698 40.098 28.8186C39.9362 28.3609 39.7512 27.9217 39.5663 27.4825C39.2935 26.8213 39.0161 26.2203 38.7619 25.6516C38.6324 25.3927 38.5214 25.1569 38.4105 24.9165C38.2857 24.6437 38.1562 24.371 38.0268 24.112C37.9343 23.9132 37.8279 23.7283 37.754 23.5434L36.9634 22.0824C36.8524 21.8836 37.0374 21.6478 37.2546 21.7079L42.2016 23.0487H42.2155C42.2247 23.0487 42.2294 23.0533 42.234 23.0533L42.8859 23.2336L43.6025 23.437L43.866 23.511V20.5706C43.866 19.1512 45.0034 18 46.4089 18C47.1116 18 47.7496 18.2866 48.2073 18.7536C48.665 19.2206 48.9517 19.8586 48.9517 20.5706V24.935L49.4787 25.0829C49.5204 25.0968 49.562 25.1153 49.599 25.143C49.7284 25.2401 49.9133 25.3835 50.1491 25.5591C50.3341 25.7071 50.5329 25.8874 50.7733 26.0723C51.2495 26.4561 51.8181 26.9508 52.4423 27.5194C52.6087 27.6628 52.7706 27.8107 52.9185 27.9587C53.723 28.7076 54.6245 29.5861 55.4845 30.557C55.7249 30.8297 55.9607 31.1071 56.2011 31.3984C56.4415 31.6943 56.6958 31.9856 56.9177 32.2769C57.209 32.6652 57.5233 33.0674 57.7961 33.4882C57.9256 33.687 58.0735 33.8904 58.1984 34.0892C58.5497 34.6209 58.8595 35.1711 59.1554 35.7212C59.2802 35.9755 59.4097 36.2529 59.5206 36.5257C59.8489 37.2608 60.1078 38.0098 60.2742 38.7588C60.3251 38.9206 60.3621 39.0963 60.3806 39.2535V39.2904C60.436 39.5124 60.4545 39.7482 60.473 39.9886C60.547 40.756 60.51 41.5235 60.3436 42.2956C60.2742 42.6239 60.1818 42.9336 60.0708 43.2619C59.9598 43.5763 59.8489 43.9045 59.7056 44.2143C59.4282 44.8569 59.0999 45.4996 58.7115 46.1006C58.5867 46.3225 58.4388 46.5583 58.2908 46.7802C58.129 47.016 57.9626 47.238 57.8146 47.4553C57.6112 47.7327 57.3939 48.0239 57.172 48.2828C56.9732 48.5556 56.7697 48.8284 56.5478 49.0688C56.2381 49.434 55.9422 49.7808 55.6324 50.1137C55.4475 50.331 55.2487 50.5529 55.0452 50.7517C54.8464 50.9736 54.643 51.1724 54.4581 51.3573C54.1483 51.6671 53.8894 51.9075 53.6721 52.1063L53.1635 52.5733C53.0896 52.638 52.9925 52.675 52.8908 52.675H48.9517V57.7283H53.9079C55.0175 57.7283 56.0716 57.3353 56.9223 56.6141C57.2136 56.3598 58.485 55.2594 59.9876 53.5997C60.0384 53.5442 60.1032 53.5026 60.1771 53.4841L73.8668 49.5265C74.1211 49.4525 74.38 49.6467 74.38 49.9149Z" fill="white"/>
+                </svg>
+                <a href="https://opensea.io/k0j1" target="_blank">
+            	Opensea
+            	</a>
               </div>
               <div class="info-item">
-                <a href="https://www.youtube.com/user/k0j123t">
+                <!-- Youtube Icon -->
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 461.001 461.001" style="enable-background:new 0 0 461.001 461.001;" xml:space="preserve" width="24" height="24">
             	<path style="fill:#F61C0D;" d="M365.257,67.393H95.744C42.866,67.393,0,110.259,0,163.137v134.728
             		c0,52.878,42.866,95.744,95.744,95.744h269.513c52.878,0,95.744-42.866,95.744-95.744V163.137
             		C461.001,110.259,418.135,67.393,365.257,67.393z M300.506,237.056l-126.06,60.123c-3.359,1.602-7.239-0.847-7.239-4.568V168.607
             		c0-3.774,3.982-6.22,7.348-4.514l126.06,63.881C304.363,229.873,304.298,235.248,300.506,237.056z"/>
             	</svg>
+                <a href="https://www.youtube.com/user/k0j123t">
+            	Youtube Channel
             	</a>
-                Youtube Channel <a href="https://www.youtube.com/user/k0j123t">k0j1</a>
               </div>
             </div>
           </div>
           
           <!-- リリース済アプリ -->
-          <div class="pages box">
+          <div class="pages box apps">
             <div class="intro-title">
               Released Android Apps
               <button class="intro-menu"></button>
@@ -459,7 +534,7 @@
           </div>
           
           <!-- 仮想通貨 -->
-          <div class="pages box">
+          <div class="pages box vc">
             <div class="intro-title">
               仮想通貨
               <button class="intro-menu"></button>
@@ -481,13 +556,46 @@
               </svg>
               <div class="username">イーサリアム($ETH)</div>
             </div>
+            <div class="user">
+              <svg enable-background="new 0 0 2499.6 2070" viewBox="0 0 2499.6 2070" xmlns="http://www.w3.org/2000/svg" class="user-img">
+                  <path d="m2133.4 0h361.5l-752.2 744.4c-272.3 269.5-713.7 269.5-986 0l-752.1-744.4h361.5l571.4 565.5c172.4 170.7 452 170.7 624.5 0zm-1771.9 2070h-361.5l756.8-749c272.3-269.5 713.7-269.5 986 0l756.8 749h-361.5l-576.1-570.1c-172.4-170.7-452-170.7-624.5 0z" fill="#23292f" stroke="#666666" stroke-width="50"/>
+              </svg>
+              <div class="username">リップル($XRP)</div>
+            </div>
+            
+            <div class="user">
+              <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 215.66 207.2" class="user-img">
+                  <defs><style>.cls-1{fill:none;}.cls-2{fill:#8d33e5;}.cls-3{fill:#7000df;}.cls-4{clip-path:url(#clip-path);}.cls-10,.cls-5{fill:#fff;}.cls-5{opacity:0.1;}.cls-6{fill:#3f017f;}.cls-7{fill:#f4a900;}.cls-8{fill:#78b6e4;}.cls-9{fill:#20b5ac;}.cls-11{fill:#531b8c;}</style>
+                  <clipPath id="clip-path"><path class="cls-1" d="M305.21-207.78a2.59,2.59,0,0,1-.33-.19l-.59-.32a191.23,191.23,0,0,0-74.06-23.63c-5.6-.6-10.77-.93-15.78-1a206.64,206.64,0,0,0-28.14,1.38A189.09,189.09,0,0,0,166.12-228a191,191,0,0,0-51.21,20.05l-.16.08a3.33,3.33,0,0,0-2.26,3.54v.42a216.71,216.71,0,0,0,1.65,24.39,189.91,189.91,0,0,0,4.77,23.85,194.17,194.17,0,0,0,10,28.28c.06.15.11.3.18.45l1.24,2.87c.85,1.91,1.65,3.83,2.53,5.73l2.77,5.61c.48.93.91,1.89,1.42,2.8l1.52,2.74c1,1.82,2,3.67,3.08,5.47L145-96.4c1.07,1.8,2.28,3.52,3.47,5.24s2.35,3.47,3.61,5.14c2.57,3.31,5,6.72,7.81,9.87,1.37,1.59,2.67,3.24,4.1,4.78l4.3,4.61c1.41,1.57,3,3,4.46,4.47s3,3,4.56,4.36c3.17,2.78,6.27,5.63,9.62,8.2a181.48,181.48,0,0,0,20.95,14.61l2.15,1.3,2.4-1.57h0l1.17-.8,1.28-.81c.85-.53,1.72-1.08,2.61-1.67,1.77-1.15,3.51-2.33,5.24-3.54q5.17-3.63,10.1-7.58a193.22,193.22,0,0,0,18.59-17,191.44,191.44,0,0,0,29.75-40.25A193,193,0,0,0,292-130.15a187.73,187.73,0,0,0,11.81-38.73,189.83,189.83,0,0,0,2.75-20.19c.34-4.42.54-8.92.64-14.22v-1.27A3.4,3.4,0,0,0,305.21-207.78ZM167.26-223.13a184.24,184.24,0,0,1,19.64-3.46,202.88,202.88,0,0,1,27.45-1.35c4.87.09,9.9.41,15.35,1a186.59,186.59,0,0,1,72.18,23l.1,0,.18.1v.42c-.1,5.15-.3,9.57-.62,13.88a186.25,186.25,0,0,1-2.68,19.65,182.14,182.14,0,0,1-12.69,40.46,184,184,0,0,1-37.71,55.11A186,186,0,0,1,217.6-49q-2.34,1.48-4.72,2.9c-.85.51-1.75,1-2.67,1.54l-.37.21c-4.18-2.35-8.4-4.92-12.51-7.69A185.92,185.92,0,0,1,123.75-157a186,186,0,0,1-4.64-23.2,213.09,213.09,0,0,1-1.61-23.51A185.89,185.89,0,0,1,167.26-223.13Z"/></clipPath>
+                  </defs>
+                  <path class="cls-2" d="M107.83,4a194.23,194.23,0,0,1,97,26L207,31.29v2.53a194.56,194.56,0,0,1-97,168l-2.19,1.26-2.18-1.26a194.55,194.55,0,0,1-97-168V31.29L10.81,30a194.29,194.29,0,0,1,97-26"/>
+                  <path class="cls-3" d="M204.84,30a194.23,194.23,0,0,0-97-26h0V203.11h0l2.19-1.26a194.56,194.56,0,0,0,97-168V31.29Z"/>
+                  <g class="cls-4"><rect class="cls-5" x="29.72" y="-237.26" width="180.11" height="247.6"/></g>
+                  <path class="cls-3" d="M204.84,30a194.23,194.23,0,0,0-97-26h0V203.11h0l2.19-1.26a194.56,194.56,0,0,0,97-168V31.29Z"/>
+                  <path class="cls-6" d="M170.42,65.87s0-.09,0-.13c0-.2,0-.39,0-.58a7.58,7.58,0,0,0-.17-.93h0c0-.11,0-.23-.08-.34a4.7,4.7,0,0,0-.17-.45l-.11-.27a45.47,45.47,0,0,0-3.79-8.62A70.34,70.34,0,0,0,160.16,46c-1-1.35-2.16-2.65-3.27-4l-.87-1a5.22,5.22,0,0,0-1.24-1,5.39,5.39,0,0,0-3-.76,5.31,5.31,0,0,0-1.53.29,4.48,4.48,0,0,0-.68.29l-.43.16c-.26.13-.5.27-.67.37l-1.18.69-1.8,1.06L142.34,44c-5.89,3.27-11.83,6.43-17.77,9.6q-8.34,4.42-16.74,8.76Q99.43,58,91.09,53.6c-5.94-3.17-11.88-6.33-17.77-9.6l-3.16-1.78-1.8-1.06-1.18-.69c-.17-.1-.41-.24-.67-.37l-.42-.16a5.07,5.07,0,0,0-.69-.29,5.31,5.31,0,0,0-1.53-.29,5.39,5.39,0,0,0-3,.76,5.22,5.22,0,0,0-1.24,1l-.87,1c-1.11,1.3-2.22,2.6-3.27,4a70.34,70.34,0,0,0-5.89,8.52,45.47,45.47,0,0,0-3.79,8.62l-.11.27a4.7,4.7,0,0,0-.17.45c0,.11,0,.23-.08.34h0a7.58,7.58,0,0,0-.17.93c0,.19,0,.38,0,.58,0,0,0,.09,0,.13s0,0,0,.08a6.59,6.59,0,0,0,.85,3.24,7.14,7.14,0,0,0,1.63,2c.17.13.33.27.51.39l.48.3.7.45,5.66,3.56L66.37,83l11.3,7.13L87,95.84q-.26,15.69,0,31.4l.12,8.45L87.2,140l.09,2.2c0,.37,0,.78.06,1.26a7.45,7.45,0,0,0,.52,2.28,8.68,8.68,0,0,0,6.46,5c1.38.36,2.87.71,4.32,1a66.16,66.16,0,0,0,18.36,0c1.45-.3,2.94-.65,4.32-1a8.68,8.68,0,0,0,6.46-5,7.45,7.45,0,0,0,.52-2.28c0-.48,0-.89.06-1.26l.09-2.2.11-4.26.12-8.45q.26-15.72,0-31.4l9.31-5.7L149.29,83l11.29-7.16,5.66-3.56.7-.45.48-.3c.18-.12.34-.26.51-.39a7.14,7.14,0,0,0,1.63-2,6.59,6.59,0,0,0,.85-3.24S170.42,65.9,170.42,65.87ZM109.08,142c-.42,0-.84,0-1.25,0s-.83,0-1.25,0c-2.12,0-4.28.16-6.43.1a34.62,34.62,0,0,1-3.5-.48l-.81-.15s0,0,0,.07a.17.17,0,0,1-.11.06.24.24,0,0,1-.15-.06,3.57,3.57,0,0,1,0-.74V91l-2.06-1.12h0L51.72,67.75l-.36-.19-.14,0a2.11,2.11,0,0,1-.76-.35,1.91,1.91,0,0,1-.24-.32,2.31,2.31,0,0,1-.25-1.5,51,51,0,0,1,2.93-9.18A57.4,57.4,0,0,1,57,48.46a45.24,45.24,0,0,1,4.31-5.35l.46-.47a2.64,2.64,0,0,1,.41-.36,3.08,3.08,0,0,1,.91-.49,3.43,3.43,0,0,1,1.68-.15,4.18,4.18,0,0,1,.89.43l2.17,1.29,4.35,2.56c5.77,3.46,11.48,7,17.21,10.57s11.4,7.17,17.08,10.8h0l.56-1h0l.74.39,0,0,0,0,.74-.39h0l.56,1h0q8.52-5.45,17.08-10.8c5.73-3.55,11.44-7.11,17.21-10.57l4.35-2.56L150,42.07a4.18,4.18,0,0,1,.89-.43,3.43,3.43,0,0,1,1.68.15,3.08,3.08,0,0,1,.91.49,2.64,2.64,0,0,1,.41.36l.46.47a45.24,45.24,0,0,1,4.31,5.35,57.4,57.4,0,0,1,4.12,7.72,51,51,0,0,1,2.93,9.18,2.31,2.31,0,0,1-.25,1.5,1.91,1.91,0,0,1-.24.32,2.11,2.11,0,0,1-.76.35l-.14,0-.36.19L122.19,89.86h0L120.12,91v49.79a3.57,3.57,0,0,1,0,.74.24.24,0,0,1-.15.06.17.17,0,0,1-.11-.06s0,0,0-.07l-.81.15a34.62,34.62,0,0,1-3.5.48C113.36,142.13,111.2,142,109.08,142Z"/>
+                  <path class="cls-7" d="M91.36,93.59A22,22,0,0,0,83,76.14c-7.44-5.92-19-8.08-30.23-5.63a5.39,5.39,0,0,1-2.5-.17L91.36,94Z"/>
+                  <path class="cls-8" d="M127.7,67.42c8.84-3.48,16.5-12.43,20-23.36a4.3,4.3,0,0,1,2-2.44L107.86,65.7l.53.31A21.93,21.93,0,0,0,127.7,67.42Z"/>
+                  <path class="cls-9" d="M123.52,94.67a21.88,21.88,0,0,0-10.63,16c-1.34,9.35,2.59,20.41,10.26,28.85a4.34,4.34,0,0,1,1.15,3l.16-48.35Z"/>
+                  <path class="cls-6" d="M114.9,112.47c.83-6.57,5.22-12,11.28-15.66l-1.72-2.69-.94.55a21.88,21.88,0,0,0-10.63,16c-1.18,8.23,1.73,17.79,7.68,25.72C116,128.74,113.85,120.07,114.9,112.47Z"/>
+                  <path class="cls-6" d="M124.2,141.57a4.59,4.59,0,0,1,.1.9v-.77Z"/>
+                  <path class="cls-6" d="M128.11,64.94c-6.13,2.51-13,1.39-19.19-2.1l-1.49,2.82.95.55a21.86,21.86,0,0,0,19.14,1.36c7.75-3,14.63-10.27,18.59-19.35C141.73,56,135.24,62.1,128.11,64.94Z"/>
+                  <path class="cls-6" d="M148.84,42.49a4.33,4.33,0,0,1,.74-.53l-.68.38Z"/>
+                  <path class="cls-6" d="M80.64,77.52c5.14,4.18,7.45,9.79,7.32,16.86l3.18,1,1-1.1c.19-6.73-2.75-15.15-8-19.44-6.35-5.37-17-6.7-25.87-5.13C67.26,69.84,74.75,72.61,80.64,77.52Z"/>
+                  <path class="cls-6" d="M51,70.16a5.07,5.07,0,0,1-.82-.38l.66.4Z"/>
+                  <path id="Path_11" data-name="Path 11" class="cls-10" d="M107.82,148a49.07,49.07,0,0,1-13.26-1.73,4.43,4.43,0,0,1-3.19-4.25V93.59A22,22,0,0,0,83,76.14c-7.44-5.92-19-8.08-30.23-5.63a4.41,4.41,0,0,1-5.27-3.32,4.46,4.46,0,0,1,.17-2.53A75.66,75.66,0,0,1,52.94,53,48.39,48.39,0,0,1,61.1,42.39a4.44,4.44,0,0,1,5.28-.64l40.91,23.62,1.1.64a21.93,21.93,0,0,0,19.31,1.41c8.84-3.48,16.5-12.43,20-23.36a4.41,4.41,0,0,1,5.54-2.88,4.36,4.36,0,0,1,2.08,1.4A75.18,75.18,0,0,1,162.76,53a48.43,48.43,0,0,1,5.13,12.35,4.42,4.42,0,0,1-2.08,4.88L124.64,94l-1.12.65a21.88,21.88,0,0,0-10.63,16c-1.34,9.35,2.59,20.41,10.26,28.85a4.41,4.41,0,0,1-2.52,7.33A82.15,82.15,0,0,1,107.82,148Z"/>
+                  <path class="cls-6" d="M207,33.82V31.29L204.84,30a194,194,0,0,0-194,0L8.63,31.29v2.53a194.55,194.55,0,0,0,97,168l2.18,1.26,2.19-1.26A194.56,194.56,0,0,0,207,33.82Zm-99.2,159.36C50.59,159.74,14,100,13.63,33.76a191.78,191.78,0,0,1,188.4,0C201.69,100.05,165.07,159.75,107.83,193.18Z"/>
+                  <path class="cls-11" d="M107.83,193.18h0C50.59,159.74,14,100,13.63,33.76A192,192,0,0,1,107.83,9V4a194.29,194.29,0,0,0-97,26L8.63,31.29v2.53a194.55,194.55,0,0,0,97,168l2.18,1.26Z"/>
+              </svg>
+              <div class="username">シンボル($XYM)</div>
+            </div>
           </div>
 
         </div>
         
         <div class="timeline-center">
+
           <!-- Twitter -->
-          <div class="event box">
+          <div class="event box sns">
             <div class="event-wrapper">
               <blockquote class="twitter-tweet">
                   <p lang="ja" dir="ltr">
@@ -512,7 +620,7 @@
           </div>
 
           <!-- Twitter -->
-          <div class="event box">
+          <div class="event box sns">
             <div class="event-wrapper">
               <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">【Android】COINNEWSまとめ Ver.1.0.0<br>正式版リリース<br><br>【機能】<br>・RSSサイトから記事を取得<br>・サイト別や通貨別に分類わけして表示<br>・記事を保存しておけるブックマーク機能<br>・表示した記事は履歴として記録<br>・読みたい記事はアプリ内WebViewで表示可能<a href="https://t.co/KbOEWX2x21">https://t.co/KbOEWX2x21</a><a href="https://twitter.com/hashtag/COINNEWS%E3%81%BE%E3%81%A8%E3%82%81?src=hash&amp;ref_src=twsrc%5Etfw">#COINNEWSまとめ</a> <a href="https://t.co/uXX9hBJhkv">pic.twitter.com/uXX9hBJhkv</a></p>&mdash; k0j1 (@k0j1_t) <a href="https://twitter.com/k0j1_t/status/1429575849859190784?ref_src=twsrc%5Etfw">August 22, 2021</a></blockquote> 
               <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -520,19 +628,30 @@
           </div>
           
           <!-- Twitter -->
-          <div class="event box">
+          <div class="event box sns">
             <div class="event-wrapper">
               <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">【Symbol x NFT】<br>映像素材を <a href="https://t.co/ZtdZERrJjL">https://t.co/ZtdZERrJjL</a> に出品してみました。<br><br>Thanks...<a href="https://t.co/6RgpgS8bfN">https://t.co/6RgpgS8bfN</a><br><br>登録方法はこちらがとても参考になりました✨<a href="https://t.co/lnXHgx886A">https://t.co/lnXHgx886A</a><a href="https://twitter.com/hashtag/NemberArt?src=hash&amp;ref_src=twsrc%5Etfw">#NemberArt</a> <a href="https://twitter.com/hashtag/NFT?src=hash&amp;ref_src=twsrc%5Etfw">#NFT</a> <a href="https://twitter.com/hashtag/Symbol?src=hash&amp;ref_src=twsrc%5Etfw">#Symbol</a> <a href="https://twitter.com/hashtag/XYM?src=hash&amp;ref_src=twsrc%5Etfw">#XYM</a> <a href="https://t.co/EQoWee1lhD">pic.twitter.com/EQoWee1lhD</a></p>&mdash; k0j1 (@k0j1_t) <a href="https://twitter.com/k0j1_t/status/1433804678131695618?ref_src=twsrc%5Etfw">September 3, 2021</a></blockquote> 
               <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
           </div>
           
+          <!-- Twitter タイムライン -->
+          <div class="event box sns">
+            <div class="event-wrapper">
+              <a class="twitter-timeline" href="https://twitter.com/k0j1_t?ref_src=twsrc%5Etfw">Tweets by k0j1_t</a>
+              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+          </div>
+            
+            
+          
           
         </div>
         
         <div class="timeline-right">
+            
           <!-- 更新情報 -->
-          <div class="event box">
+          <div class="event box info">
             <div class="event-wrapper">
               <img src="https://www.takahara-books.com/Image/Android/COINNEWS/COINNEWS.png" class="event-img" />
               <div class="event-date">
@@ -543,6 +662,20 @@
               <div class="event-subtitle">2021/08/21</div>
             </div>
           </div>
+          
+          <!-- 更新情報 -->
+          <div class="event box info">
+            <div class="event-wrapper">
+              <img src="https://www.takahara-books.com/Image/Android/RunningChihuahua/Icon512.png" class="event-img" />
+              <div class="event-date">
+                <div class="event-month">Des</div>
+                <div class="event-day">2</div>
+              </div>
+              <div class="event-title">逃げろチワワ！ Ver.1.9.0</div>
+              <div class="event-subtitle">2020/12/02</div>
+            </div>
+          </div>
+          
         </div>
         
       </div>
