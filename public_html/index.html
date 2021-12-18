@@ -19,7 +19,7 @@
 
   /*** 左画面 ***/
   .left-side {width: 260px;border-right: 1px solid #272a3a;display: flex;flex-direction: column;transition: 0.3s;background-color: #151728;overflow: auto;flex-shrink: 0;}
-  @media screen and (max-width: 930px) {
+  @media screen and (max-width: 1600px) {
     .left-side.active { z-index: 4;}
     .left-side.active > *:not(.logo) {opacity: 1;transition: 0.1s 0.1s;}
     .left-side.active .left-side-button svg:first-child {opacity: 0;}
@@ -77,7 +77,7 @@
   .profile:before {  content: "";  width: 100%;  height: 100%;  position: absolute;  z-index: -1;  left: 0;  top: 0;  filter: blur(50px);  opacity: 0.7;
     background-image: url("https://images.unsplash.com/photo-1508247967583-7d982ea01526?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80");
     background-repeat: no-repeat;  background-size: cover;  background-position: center;}
-  .profile-menu {  position: absolute;  bottom: 0;  padding-left: 200px;  background: #151728;  width: 100%;  display: flex;  border-radius: 0 0 4px 4px;}
+  .profile-menu {  position: absolute;  bottom: 0;  padding-left: 200px;  background: #151728;  width: 100%;  display: flex;  border-radius: 0 0 4px 4px; margin-bottom:0px;}
   .profile-menu-link {  padding: 20px 16px;  color: #5c5e6e;  transition: 0.1s;  cursor: pointer;}
   .profile-menu-link.active, .profile-menu-link:hover {  color: #fff;  background-color: #8b8dae;}
   .profile-avatar {  position: absolute;  align-items: center;  display: flex;  z-index: 1;  bottom: 16px;  left: 24px;}
@@ -226,7 +226,7 @@
   }
 
   .left-side-button {display: none;}
-  @media screen and (max-width: 930px) {
+  @media screen and (max-width: 1600px) {
     .left-side-button {display: flex;flex-shrink: 0;align-items: center;justify-content: center;position: relative;cursor: pointer;height: 60px;background-color: rgba(39, 42, 58, 0.5);border: 0;padding: 0;line-height: 0;color: #fff;border-bottom: 1px solid #272a3a;  }
     .left-side-button svg {transition: 0.2s;width: 24px;  }
     .left-side-button svg:last-child {  position: absolute;left: 50%;transform: translate(100%, -50%);top: 50%;opacity: 0;  }
@@ -289,7 +289,6 @@
         <path d="M19 12H5M12 19l-7-7 7-7"/>
       </svg>
     </div>
-    <div class="logo">takahara-books</div>
     <!--
     <span class="follow-text">
       <a href="https://www.instagram.com/k0j1_t/" target="_blank">
@@ -367,10 +366,7 @@
   
   
   <div class="main">
-    <!-- 検索バー -->  
-    <div class="search-bar">
-      <input type="text" placeholder="Search" />
-    </div>
+    <div class="logo">takahara-books</div>
     <!-- メインコンテンツ -->  
     <div class="main-container">
       <input type="checkbox" id="prof-info" name="profile-menu" value="1" checked>
