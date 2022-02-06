@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="apple-touch-icon" type="image/png" href="https://www.takahara-books.com/Image/logo.png" />
   <link rel="shortcut icon" type="image/x-icon" href="https://www.takahara-books.com/Image/logo.png" />
   <title>高原書店</title>
@@ -38,7 +39,7 @@
 
   .main {flex-grow: 1;display: flex;flex-direction: column;background-color: #181d2f;}
 
-  .logo {font-family: 'Grey Qo', cursive, sans-serif;font-size: 42px;color: #fff;font-weight: 600;text-align: center;height: 68px;line-height: 68px;letter-spacing: 4px;position: sticky;top: 0;
+  .logo {font-family: 'Grey Qo', cursive, sans-serif;font-size: 42px;color: #fff;font-weight: 600;text-align: center;height: 60px;line-height: 68px;letter-spacing: 4px;position: sticky;top: 0;
     background: linear-gradient(to bottom, #151728 0%, #151728 76%, rgba(21, 23, 40, 0) 100%);}
   .side-title {font-family: "DM Sans", sans-serif;color: #5c5e6e;font-size: 15px;font-weight: 600;margin-bottom: 20px;}
   .side-wrapper {padding: 30px;}
@@ -72,8 +73,8 @@
   .vc{display:none;}
   .nft{display:none;}
 
-  .profile {  position: relative;  height: 40vh;  min-height: 250px;  max-height: 350px;  z-index: 1;}
-  .profile-cover {  position: absolute;  top: 0;  left: 50;  width: 100%;  height: 100%;  object-fit: cover;  object-position: center;  border-radius: 4px;}
+  .profile {  position: relative;  height: 40vh;  min-height: 500px;  max-height: 500px;  z-index: 1;}
+  .profile-cover {  position: absolute;  top: 0;  left: 0;  width: 100%;  height: 100%;  object-fit: cover;  object-position: center;  border-radius: 4px;}
   .profile:before {  content: "";  width: 100%;  height: 100%;  position: absolute;  z-index: -1;  left: 0;  top: 0;  filter: blur(50px);  opacity: 0.7;
     background-image: url("https://images.unsplash.com/photo-1508247967583-7d982ea01526?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80");
     background-repeat: no-repeat;  background-size: cover;  background-position: center;}
@@ -233,12 +234,13 @@
   }
 
   @media screen and (max-width: 700px) {
-    .profile-cover { left: 0; }
-    .profile-avatar {top: -150px;    left: 50%;    transform: translatex(-50%);    align-items: center;    flex-direction: column;    justify-content: center;  }
-    .profile-img {height: 100px;    width: 100px;  }
+    .profile{height:280px; min-height: 280px; max-height: 280px; }
+    .profile-cover {left: 0;}
+    .profile-avatar {top: 10px; left: 60px; transform: translatex(-50%); flex-direction: column;}
+    .profile-img {height: 100px; width: 100px;}
     .profile-name {margin: 5px 0;}
-    .profile-menu {padding-left: 0;    width: 100%;    overflow: auto;    justify-content: center;  }
-    .profile-menu-link {  padding: 16px;    font-size: 15px;  }
+    .profile-menu {padding-left: 0; width: 100%; overflow: auto; justify-content: center;}
+    .profile-menu-link {padding: 16px; font-size: 15px;}
   }
   @media screen and (max-width: 480px) {
     .profile-menu-link:nth-last-child(1), .profile-menu-link:nth-last-child(2) {display: none;}
