@@ -119,7 +119,10 @@
   .timeline-left {  width: 310px;  flex-shrink: 0;}
   .timeline-center {  width: 800px;  flex-grow: 1; padding-left: 20px; flex-shrink: 1;}
   .timeline-right {  flex-grow: 2;  padding-left: 20px; flex-shrink: 2; margin-top: -20px;}
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1350px) {
+    .timeline-right { display:none; }
+  }
+  @media screen and (max-width: 1030px) {
     .timeline {  flex-wrap: wrap;  flex-direction: column-reverse;}
     .timeline-right {  padding-left: 0;  margin-bottom: 20px;}
     .timeline-center { width: 100%; padding-left: 0;  margin-bottom: 20px;}
@@ -233,7 +236,7 @@
     .left-side-button svg:last-child {  position: absolute;left: 50%;transform: translate(100%, -50%);top: 50%;opacity: 0;  }
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 1210px) {
     .profile{height:280px; min-height: 280px; max-height: 280px; }
     .profile-cover {left: 0;}
     .profile-avatar {top: 10px; left: 60px; transform: translatex(-50%); flex-direction: column;}
