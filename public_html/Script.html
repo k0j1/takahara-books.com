@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja" >
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="apple-touch-icon" type="image/png" href="https://www.takahara-books.com/Image/logo.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="https://www.takahara-books.com/Image/logo.png" />
+  <title>高原書店</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <style>
+  @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700|Source+Sans+Pro:300,400,600,700&display=swap");
+  @import url('https://fonts.googleapis.com/css2?family=Grechen+Fuemen&family=Grey+Qo&display=swap');
+  
+  /*** 全体 ***/
+  * {outline:none; box-sizing:border-box;}
+  html {-webkit-font-smoothing:antialiased;}
+  body {font-family:"メイリオ",sans-serif; background-color: #373e57;color: #ccc8db;}
+  .container {background-color: #151728; display: flex;max-width: 1600px;height: 100vh;overflow: hidden;margin: 0 auto;}
+
+  /*** 左画面 ***/
+  .left-side {width: 260px;border-right: 1px solid #272a3a;display: flex;flex-direction: column;transition: 0.3s;background-color: #151728;overflow: auto;flex-shrink: 0;}
+  @media screen and (max-width: 1600px) {
+    .left-side.active { z-index: 4;}
+    .left-side.active > *:not(.logo) {opacity: 1;transition: 0.1s 0.1s;}
+    .left-side.active .left-side-button svg:first-child {opacity: 0;}
+    .left-side.active .left-side-button svg:last-child {transform: translate(-50%, -50%);opacity: 1;}
+    .left-side:not(.active) {width: 56px;overflow: hidden;}
+    .left-side:not(.active) > *:not(.logo):not(.left-side-button) {opacity: 0;}
+    .left-side:not(.active) .logo {writing-mode: vertical-lr;display:none;align-items: center;margin-top: -10px;}
+  }
+  /*** 右画面 ***/
+  /*.right-side {width: 280px;flex-shrink: 0;margin-left: auto;overflow: auto;background-color: #151728;display: flex;flex-direction: column;}
+  @media screen and (max-width: 1210px) {
+    .right-side {position: fixed;right: 0;top: 0;transition: 0.3s;height: 100%;transform: translateX(280px);z-index: 4;}
+    .right-side.active {transform: translatex(0);}
+  }*/
+  input{display:none;}
+
+  .main {flex-grow: 1;display: flex;flex-direction: column;background-color: #181d2f;}
+
+  .logo {font-family: 'Grey Qo', cursive, sans-serif;font-size: 42px;color: #fff;font-weight: 600;text-align: center;height: 60px;line-height: 68px;letter-spacing: 4px;position: sticky;top: 0;
+    background: linear-gradient(to bottom, #151728 0%, #151728 76%, rgba(21, 23, 40, 0) 100%);}
+  .side-title {font-family: "DM Sans", sans-serif;color: #5c5e6e;font-size: 15px;font-weight: 600;margin-bottom: 20px;}
+  .side-wrapper {padding: 30px;}
+  .side-menu {display: flex;flex-direction: column;font-size: 15px;white-space: nowrap;}
+  .side-menu svg {margin-right: 16px;width: 16px;}
+  .side-menu a {text-decoration: none;color: #9c9cab;display: flex;align-items: center;}
+  .side-menu a:hover {color: #fff;}
+  .side-menu a:not(:last-child) {margin-bottom: 20px;}
+
+  .follow-me {text-decoration: none;font-size: 14px;display: flex;align-items: center;  margin-top: auto;  overflow: hidden;  color: #9c9cab;  padding: 0 20px;  height: 52px;  flex-shrink: 0;  border-top: 1px solid #272a3a;  position: relative;}
+  .follow-me svg {  width: 16px;  height: 16px;  margin-right: 8px;}
+  .follow-text {display: flex;  align-items: center;  transition: 0.1s;}
+  .follow-me:hover .follow-text {  transform: translateY(100%);}
+  .follow-me:hover .developer {  top: 0;}
+
+  .developer {  position: absolute;  color: #fff;  left: 0;  top: -100%;  display: flex;  transition: 0.3s;  padding: 0 20px;  align-items: center;  background-color: #272a3a;  width: 100%;  height: 100%;}
+  .developer img {  border-radius: 50%;  width: 26px;  height: 26px;  object-fit: cover;  margin-right: 10px;}
+  
+  .search-bar {  height: 60px;  background-color: #151728;  z-index: 3;  position: relative;}
+  .search-bar input {  height: 100%;  width: 100%;  display: block;  background-color: transparent;  border: none;  padding: 0 54px;  color: #fff;  font-family: "Source Sans Pro", sans-serif;  font-weight: 600;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3e%3cpath d='M508.9 478.7L360 330a201.6 201.6 0 0045.2-127.3C405.3 90.9 314.4 0 202.7 0S0 91 0 202.7s91 202.6 202.7 202.6c48.2 0 92.4-17 127.3-45.2L478.7 509c4.2 4.1 11 4.1 15 0l15.2-15.1c4.1-4.2 4.1-11 0-15zm-306.2-116c-88.3 0-160-71.8-160-160s71.7-160 160-160 160 71.7 160 160-71.8 160-160 160z' data-original='%23000000' class='active-path' data-old_color='%23000000' fill='%235C5D71'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;  background-size: 16px;  background-position: 25px 50%;}
+  .search-bar input::placeholder {  color: #5c5d71;}
+
+  .main-container {  padding: 20px;  flex-grow: 1;  overflow: auto;  background-color: #24273b; overflow-x: hidden;}
+
+  .info{display:none;}
+  .sns{display:none;}
+  .apps{display:none;}
+  .game{display:none;}
+  .vc{display:none;}
+  .nft{display:none;}
+
+  .profile {  position: relative;  height: 40vh;  min-height: 500px;  max-height: 500px;  z-index: 1;}
+  .profile-cover {  position: absolute;  top: 0;  left: 0;  width: 100%;  height: 100%;  object-fit: cover;  object-position: center;  border-radius: 4px;}
+  .profile:before {  content: "";  width: 100%;  height: 100%;  position: absolute;  z-index: -1;  left: 0;  top: 0;  filter: blur(50px);  opacity: 0.7;
+    background-image: url("https://images.unsplash.com/photo-1508247967583-7d982ea01526?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80");
+    background-repeat: no-repeat;  background-size: cover;  background-position: center;}
+  .profile-menu {  position: absolute;  bottom: 0;  padding-left: 200px;  background: #151728;  width: 100%;  display: flex;  border-radius: 0 0 4px 4px; margin-bottom:0px;}
+  .profile-menu-link {  padding: 20px 16px;  color: #5c5e6e;  transition: 0.1s;  cursor: pointer;}
+  .profile-menu-link.active, .profile-menu-link:hover {  color: #fff;  background-color: #8b8dae;}
+  .profile-avatar {  position: absolute;  align-items: center;  display: flex;  z-index: 1;  bottom: 16px;  left: 24px;}
+  .profile-img {  width: 150px;  height: 150px;  border-radius: 50%;  object-fit: cover;  border: 3px solid #151728;}
+  .profile-name {  margin-left: 24px;  margin-bottom: 24px;  font-size: 22px;  color: #fff;  font-weight: 600;  font-family: "DM Sans", sans-serif;}
+  input#prof-info:checked ~ .profile .profile-menu label.prof-info{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-info:checked ~ .profile .profile-menu label.prof-info:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-sns:checked ~ .profile .profile-menu label.prof-sns{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-sns:checked ~ .profile .profile-menu label.prof-sns:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-apps:checked ~ .profile .profile-menu label.prof-apps{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-apps:checked ~ .profile .profile-menu label.prof-apps:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-game:checked ~ .profile .profile-menu label.prof-game{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-game:checked ~ .profile .profile-menu label.prof-game:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-vc:checked ~ .profile .profile-menu label.prof-vc{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-vc:checked ~ .profile .profile-menu label.prof-vc:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-nft:checked ~ .profile .profile-menu label.prof-nft{  color: #fff;  background-color: #1b1d2e;  border-bottom: 3px solid #1488fa;}
+  input#prof-nft:checked ~ .profile .profile-menu label.prof-nft:hover {  color: #fff;  background-color: #8b8dae;  border-bottom: 3px solid #1488fa;}
+  input#prof-info:checked ~ .timeline .timeline-left .info{display:block;}
+  input#prof-info:checked ~ .timeline .timeline-center .info{display:block;}
+  input#prof-info:checked ~ .timeline .timeline-right .info{display:block;}
+  input#prof-sns:checked ~ .timeline .timeline-left .sns{display:block;}
+  input#prof-sns:checked ~ .timeline .timeline-center .sns{display:block;}
+  input#prof-sns:checked ~ .timeline .timeline-right .sns{display:block;}
+  input#prof-apps:checked ~ .timeline .timeline-left .apps{display:block;}
+  input#prof-apps:checked ~ .timeline .timeline-center .apps{display:block;}
+  input#prof-apps:checked ~ .timeline .timeline-right .apps{display:block;}
+  input#prof-game:checked ~ .timeline .timeline-left .game{display:block;}
+  input#prof-game:checked ~ .timeline .timeline-center .game{display:block;}
+  input#prof-game:checked ~ .timeline .timeline-right .game{display:block;}
+  input#prof-vc:checked ~ .timeline .timeline-left .vc{display:block;}
+  input#prof-vc:checked ~ .timeline .timeline-center .vc{display:block;}
+  input#prof-vc:checked ~ .timeline .timeline-right .vc{display:block;}
+  input#prof-nft:checked ~ .timeline .timeline-left .nft{display:block;}
+  input#prof-nft:checked ~ .timeline .timeline-center .nft{display:block;}
+  input#prof-nft:checked ~ .timeline .timeline-right .nft{display:block;}
+
+  .timeline {  display: flex;  padding-top: 20px;  position: relative;  z-index: 2;}
+  .timeline-left {  width: 310px;  flex-shrink: 0;}
+  .timeline-center {  width: 600px;  flex-grow: 1; padding-left: 20px; flex-shrink: 1;}
+  .timeline-right {  flex-grow: 2;  padding-left: 20px; flex-shrink: 2; margin-top: -20px;}
+  @media screen and (max-width: 1350px) {
+    .timeline-right { display:none; }
+    .timeline-center { width: 100%; }
+  }
+  @media screen and (max-width: 1030px) {
+    .timeline {  flex-wrap: wrap;  flex-direction: column-reverse;}
+    .timeline-right {  padding-left: 0;  margin-bottom: 20px;}
+    .timeline-center { width: 100%; padding-left: 0;  margin-bottom: 20px;}
+    .timeline-left {  width: 100%;  }
+  }
+  @media screen and (max-width: 780px) {
+    .timeline {  flex-wrap: wrap;  flex-direction: column-reverse;}
+    .timeline-right { display:block; padding-left: 0;  margin-bottom: 20px;}
+    .timeline-center { display:none; padding-left: 0;  margin-bottom: 0px;}
+    .timeline-left {  width: 100%;  }
+  }
+  
+  .box {background-color: #151728;  border-radius: 4px;}
+  .intro {  padding: 20px;}
+  .intro-title {  font-family: "DM Sans", sans-serif;  color: #5c5e6e;  font-weight: 600;  font-size: 18px;  display: flex;  align-items: center;  margin-bottom: 20px;}
+  .intro-menu {  background-color: #8f98a9;  box-shadow: -8px 0 0 0 #8f98a9, 8px 0 0 0 #8f98a9;  width: 5px;  height: 5px;  border: 0;  padding: 0;  border-radius: 50%;  margin-left: auto;  margin-right: 8px;}
+
+  .info {  font-size: 15px;}
+  .info-item {  display: flex;  color: #c3c5d5;}
+  .info-item + .info-item {  margin-top: 14px;}
+  .info-item a {  margin-left: 6px;  color: #1771d6;  text-decoration: none;}
+  .info-item svg {  width: 24px;  margin-top:-4px; margin-right: 10px;}
+
+  .event {  position: relative;  margin-top: 20px;  padding: 10px;}
+  .event-wrapper {  position: relative;}
+  .event-img {  max-width: 100%;  display: block;  padding-bottom: 12px;}
+  .event-date {  position: absolute;  left: 20px;  top: 15px;}
+  .event-month {  background-color: #1687fa;  padding: 7px 20px;  font-weight: 600; font-family: "DM Sans", sans-serif;  color: #fff;  text-align: center;  border-radius: 4px 4px 0 0;}
+  .event-day {  width: 100%;  backdrop-filter: blur(4px);  color: #fff;  font-size: 22px;  font-weight: 600;  font-family: "DM Sans", sans-serif;  background-color: rgba(0, 0, 0, 0.4);  padding: 6px 0;  text-align: center;}
+  .event-title {  color: #c3c5d5;  margin-bottom: 5px;  font-family: "DM Sans", sans-serif;  font-weight: 600;  padding: 0 14px;}
+  .event-subtitle {  color: #5c5e6e;  font-family: "DM Sans", sans-serif;  font-size: 13px;  font-weight: 500;  padding: 0 14px;}
+  
+  .pages {  margin-top: 20px;  padding: 20px;}
+  .user {  display: flex;  align-items: center;  cursor: pointer;}
+
+  .user + .user {  margin-top: 18px;}
+  .user-img {  border-radius: 50%;  width: 45px;  height: 45px;  margin-right: 15px;  object-fit: cover;  object-position: center;}
+  .username {  font-size: 15px;  font-family: "DM Sans", sans-serif;}
+
+  .status-menu {  padding: 20px;  display: flex;  align-items: center;}
+  .status-menu-item {  text-decoration: none;  color: #ccc8db;  padding: 10px 14px;  line-height: 0.7;  font-family: "DM Sans", sans-serif;  font-weight: 500; border-radius: 20px;}
+  .status-menu-item.active, .status-menu-item:hover {  background-color: #2e2e40;  color: #fff;}
+  .status-menu-item + .status-menu-item {margin-left: 10px;}
+  @media screen and (max-width: 500px) {
+    .status-menu {font-size: 14px;}
+    .status-menu-item + .status-menu-item {margin-left: 0;}
+  }
+  .status-img {  width: 50px;  height: 50px;  object-fit: cover;  border-radius: 50%;  margin-right: 20px;}
+  .status-main {  padding: 0 20px;  display: flex;  align-items: center;  border-bottom: 1px solid #272a3a;  padding-bottom: 20px;  flex-wrap: wrap;}
+  .status-textarea {  flex-grow: 1;  background-color: transparent;  border: none;  resize: none;  margin-top: 15px;  color: #fff;  max-width: calc(100% - 70px);}
+  .status-textarea::placeholder {  color: #5c5d71;}
+  .status-actions {  display: flex;  padding: 10px 20px;}
+  .status-action {  text-decoration: none;  color: #ccc8db;  margin-right: 20px;  display: flex; align-items: center;}
+  .status-action svg {  width: 16px;  flex-shrink: 0;  margin-right: 8px;}
+  @media screen and (max-width: 1320px) {
+    .status-action {width: 16px;    overflow: hidden;    color: transparent;    white-space: nowrap;  }
+  }
+  .status-share {background-color: #1b86f9;  border: none; color: #fff;  border-radius: 4px;  padding: 10px 20px;  margin-left: auto;  box-shadow: 0 0 20px #1b86f9;  cursor: pointer;}
+
+  .album {  padding-top: 20px;  margin-top: 20px;}
+  .album .status-main {border: none;  display: flex;}
+  .album .intro-menu {margin-bottom: auto;margin-top: 5px;}
+  .album-detail {width: calc(100% - 110px);}
+  .album-title span {color: #1771d6;cursor: pointer;}
+  .album-date {font-size: 15px;  color: #595c6c;  margin-top: 4px;}
+  .album-content {padding: 0 20px 20px;}
+  .album-photo {width: 100%;object-fit: cover;  object-position: center;  border-radius: 4px;  margin-top: 10px;}
+  .album-photos {display: flex;  margin-top: 20px;  max-height: 30vh;}
+  .album-photos > .album-photo {width: 50%;}
+  .album-right {width: 50%;  margin-left: 10px;  line-height: 0;  display: flex;  flex-direction: column;}
+  .album-right .album-photo {height: calc(50% - 10px);}
+  .album-actions {padding: 0 20px 20px;}
+  .album-action {margin-right: 20px; text-decoration: none;  color: #a2a4b4;  display: inline-flex;  align-items: center;  font-weight: 600;}
+  .album-action:hover {color: #fff;}
+  .album-action svg {width: 16px;  margin-right: 6px;}
+  .account-button {border: 0;  background: 0;  color: #64677a;  padding: 0;  cursor: pointer;  position: relative;}
+  .account-button svg {width: 20px;}
+  .account-button:not(.right-side-button) + .account-button:before {position: absolute;  right: 0px;  top: -2px;  background-color: #1b86f8;  width: 8px;  height: 8px;  border-radius: 50%;  content: "";  border: 2px solid #151728;}
+  .account-profile {width: 28px;  height: 28px;  border-radius: 50%;  margin: 0 10px;}
+  .account-user {display: inline-flex;  align-items: center;  color: #64677a;  font-weight: 600;}
+  .account-user span {font-size: 10px;  font-weight: normal;}
+  .account {height: 60px;  display: flex;  justify-content: space-evenly;  align-items: center;  position: sticky;  top: 0;  background-color: #151728;  z-index: 3;  flex-shrink: 0;}
+
+  .stories {border-bottom: 1px solid #272a3a;}
+  .stories .user-img {border: 2px solid #e2b96c;}
+  .stories .album-date {font-family: "Source Sans Pro", sans-serif;}
+  
+  .user-status {background-color: #7fd222;  width: 8px;  height: 8px;  border-radius: 50%;  margin-left: auto;}
+  .user-status.offline {background-color: #606a8d;}
+  .user-status.idle {background-color: #dd1c20;}
+  
+  .contacts .username {display: flex;  flex: 1;  align-items: center;}
+  
+  .right-search svg {width: 16px;  height: 16px;}
+  .right-search {padding-right: 10px;  display: flex;  align-items: center;  border-top: 1px solid #272a3a;  position: sticky;  bottom: 0;  margin-top: auto;}
+  .right-search input {padding-right: 10px;}
+
+  .search-bar-svgs {color: #656679;  display: flex;}
+  .search-bar-svgs svg {margin-right: 16px;}
+  
+  .overlay {width: 100%;  height: 100%;  position: fixed;  top: 0;  left: 0;  background-color: rgba(36, 39, 59, 0.8);  opacity: 0;  visibility: hidden;  pointer-events: none;  transition: 0.3s;}
+  @media screen and (max-width: 1210px) {
+    .overlay.active {z-index: 3;    opacity: 1;    visibility: visible;    pointer-events: all;  }
+  }
+
+  .right-side-button {  position: absolute;  right: 0;  top: 0;  height: 100%;  border: 0;  width: 52px;  background-color: #1e2031;  border-left: 1px solid #272a3a;  color: #fff;  display: none;  cursor: pointer;}
+  .right-side-button:before {content: "";  width: 10px;  height: 10px;  border-radius: 50%;  position: absolute;  background-color: #1b86f8;  border: 2px solid #1e2031;  top: 13px;  right: 12px;}
+  .right-side-button svg {width: 22px;}
+  @media screen and (max-width: 1210px) {
+    .right-side-button {display: block;  }
+  }
+
+  .left-side-button {display: none;}
+  @media screen and (max-width: 1600px) {
+    .left-side-button {display: flex;flex-shrink: 0;align-items: center;justify-content: center;position: relative;cursor: pointer;height: 60px;background-color: rgba(39, 42, 58, 0.5);border: 0;padding: 0;line-height: 0;color: #fff;border-bottom: 1px solid #272a3a;  }
+    .left-side-button svg {transition: 0.2s;width: 24px;  }
+    .left-side-button svg:last-child {  position: absolute;left: 50%;transform: translate(100%, -50%);top: 50%;opacity: 0;  }
+  }
+
+  @media screen and (max-width: 1210px) {
+    .profile{height:280px; min-height: 280px; max-height: 280px; }
+    .profile-cover {left: 0;}
+    .profile-avatar {top: 10px; left: 60px; transform: translatex(-50%); flex-direction: column;}
+    .profile-img {height: 100px; width: 100px;}
+    .profile-name {margin: 5px 0;}
+    .profile-menu {padding-left: 0; width: 100%; overflow: auto; justify-content: center;}
+    .profile-menu-link {padding: 16px; font-size: 15px;}
+  }
+  @media screen and (max-width: 600px) {
+    .profile-menu-link:nth-last-child(1), .profile-menu-link:nth-last-child(2) {display: none;}
+  }
+  ::-webkit-scrollbar {width: 10px;  border-radius: 10px;}
+
+  /* Track */
+  ::-webkit-scrollbar-track {background: rgba(255, 255, 255, 0.01);}
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {background: rgba(255, 255, 255, 0.11);  border-radius: 10px;}
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {background: rgba(255, 255, 255, 0.1);}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+　</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+  </script>
+
+
+
+</head>
+
+<body translate="no" >
+
+  <!-- 幅1600px高さ100%のレイアウト構築 -->
+  <div class="container" x-data="{ rightSide: false, leftSide: false }">
+  <!-- 左画面260px(930pxより小さくなった場合はメニューボタン表示) -->
+  <div class="left-side" :class="{'active' : leftSide}">
+    <div class="left-side-button" @click="leftSide = !leftSide">
+      <!-- メニューボタン -->
+      <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="6"  x2="21" y2="6"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+      <!-- ←ボタン -->
+      <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+    </div>
+    <!--
+    <span class="follow-text">
+      <a href="https://www.instagram.com/k0j1_t/" target="_blank">
+        <svg viewBox="0 0 503.84 503.84" width="32px">
+          <path d="M256,49.47c67.27,0,75.23.26,101.8,1.47,24.56,1.12,37.9,5.22,46.78,8.67a78,78,0,0,1,29,18.85,78,78,0,0,1,18.85,29c3.45,8.88,7.55,22.22,8.67,46.78,1.21,26.57,1.47,34.53,1.47,101.8s-.26,75.23-1.47,101.8c-1.12,24.56-5.22,37.9-8.67,46.78a83.51,83.51,0,0,1-47.81,47.81c-8.88,3.45-22.22,7.55-46.78,8.67-26.56,1.21-34.53,1.47-101.8,1.47s-75.24-.26-101.8-1.47c-24.56-1.12-37.9-5.22-46.78-8.67a78,78,0,0,1-29-18.85,78,78,0,0,1-18.85-29c-3.45-8.88-7.55-22.22-8.67-46.78-1.21-26.57-1.47-34.53-1.47-101.8s.26-75.23,1.47-101.8c1.12-24.56,5.22-37.9,8.67-46.78a78,78,0,0,1,18.85-29,78,78,0,0,1,29-18.85c8.88-3.45,22.22-7.55,46.78-8.67,26.57-1.21,34.53-1.47,101.8-1.47m0-45.39c-68.42,0-77,.29-103.87,1.52S107,11.08,91,17.3A123.68,123.68,0,0,0,46.36,46.36,123.68,123.68,0,0,0,17.3,91c-6.22,16-10.48,34.34-11.7,61.15S4.08,187.58,4.08,256s.29,77,1.52,103.87S11.08,405,17.3,421a123.68,123.68,0,0,0,29.06,44.62A123.52,123.52,0,0,0,91,494.69c16,6.23,34.34,10.49,61.15,11.71s35.45,1.52,103.87,1.52,77-.29,103.87-1.52S405,500.92,421,494.69A128.74,128.74,0,0,0,494.69,421c6.23-16,10.49-34.34,11.71-61.15s1.52-35.45,1.52-103.87-.29-77-1.52-103.87S500.92,107,494.69,91a123.52,123.52,0,0,0-29.05-44.62A123.68,123.68,0,0,0,421,17.3c-16-6.22-34.34-10.48-61.15-11.7S324.42,4.08,256,4.08Z" transform="translate(-4.08 -4.08)"/><path d="M256,126.64A129.36,129.36,0,1,0,385.36,256,129.35,129.35,0,0,0,256,126.64ZM256,340a84,84,0,1,1,84-84A84,84,0,0,1,256,340Z" transform="translate(-4.08 -4.08)"/><circle cx="386.4" cy="117.44" r="30.23"/>
+        </svg>
+      </a>
+      <a href="https://timeline.line.me/user/_dZxtv5XnCaz5Rn6Fh1tZnPi6UzsZymdFNZrFKzU/" target="_blank">
+        <svg stroke-width="4" stroke-linecap="round" stroke-linejoin="round" viewBox="15 15 93 93" width="32px">
+          <path class="cls-2" d="M103.5,54.72c0-19.55-19.6-35.45-43.7-35.45S16.11,35.17,16.11,54.72c0,17.53,15.55,32.21,36.54,35,1.43.31,3.36.94,3.85,2.16a8.93,8.93,0,0,1,.14,4L56,99.55c-.19,1.1-.88,4.32,3.78,2.35S85,87.09,94.13,76.54h0c6.33-7,9.37-14,9.37-21.82"/>
+          <path class="cls-1" d="M50.93,45.28H47.86a.85.85,0,0,0-.85.85v19a.85.85,0,0,0,.85.85h3.07a.85.85,0,0,0,.85-.85v-19a.85.85,0,0,0-.85-.85" fill="#fff"/>
+          <path class="cls-1" d="M72,45.28H69a.85.85,0,0,0-.85.85V57.44L59.38,45.65l-.06-.08h0l-.05-.05h0l0,0,0,0,0,0,0,0,0,0h0l-.05,0h0l-.05,0h-3.3a.85.85,0,0,0-.85.85v19a.85.85,0,0,0,.85.85h3.06a.86.86,0,0,0,.86-.85V53.86l8.73,11.79a.63.63,0,0,0,.22.21h0l.05,0h0l0,0,0,0h0l.06,0h0A.78.78,0,0,0,69,66H72a.85.85,0,0,0,.85-.85v-19a.85.85,0,0,0-.85-.85" fill="#fff"/>
+          <path class="cls-1" d="M43.54,61.25H35.21V46.13a.85.85,0,0,0-.85-.85H31.3a.85.85,0,0,0-.85.85v19h0a.87.87,0,0,0,.23.59h0v0a.87.87,0,0,0,.59.23H43.54a.85.85,0,0,0,.85-.85V62.1a.85.85,0,0,0-.85-.85" fill="#fff"/><path class="cls-1" d="M89,50a.85.85,0,0,0,.85-.85V46.13a.85.85,0,0,0-.85-.85H76.7a.85.85,0,0,0-.59.24h0v0a.83.83,0,0,0-.24.59h0v19h0a.83.83,0,0,0,.24.59h0a.85.85,0,0,0,.59.24H89a.85.85,0,0,0,.85-.85V62.1a.85.85,0,0,0-.85-.85H80.62V58H89a.85.85,0,0,0,.85-.85V54.11a.85.85,0,0,0-.85-.85H80.62V50Z" fill="#fff"/></g>
+        </svg>
+      </a>
+    </span>
+    -->
+
+    <div class="side-wrapper">
+      <div class="side-title">MENU</div>
+      <div class="side-menu">
+        <a href="https://www.takahara-books.com/">
+          <!-- Homeアイコン -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            <path d="M9 22V12h6v10" />
+          </svg>
+          ホーム
+        </a>
+        <a href="#">
+          <!-- Bookアイコン -->
+          <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          お知らせ（準備中）
+        </a>
+        <a href="https://www.takahara-books.com/Android/">
+          <!-- Markerアイコン -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+            <circle cx="12" cy="10" r="3" /></svg>
+          アプリ
+        </a>
+        <a href="https://www.takahara-books.com/Script.html">
+          <!-- Fileアイコン -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+          </svg>
+          Script
+        </a>
+        <a href="#">
+          <!-- Galleryアイコン -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+          Galery（準備中）
+        </a>
+        <a href="#">
+          <!-- Calendarアイコン -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
+          Crypt（準備中）
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <div class="main">
+    <div class="logo">takahara-books</div>
+    <!-- メインコンテンツ -->  
+    <div class="main-container">
+        <h1>Generate Background (Colorful Larch Pattern)</h1>
+        <p class="codepen" data-height="600" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="vYWNjRo" data-user="k0j1" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+          <span>See the Pen <a href="https://codepen.io/k0j1/pen/vYWNjRo">
+          ColorfulLarchPattern</a> by k0j1 (<a href="https://codepen.io/k0j1">@k0j1</a>)
+          on <a href="https://codepen.io">CodePen</a>.</span>
+        </p>
+        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+        <hr>
+        <br>
+        <h1>Generate Background (Colorful Rain Marks)</h1>
+        <p class="codepen" data-height="600" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="bGYeGmj" data-user="k0j1" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+          <span>See the Pen <a href="https://codepen.io/k0j1/pen/bGYeGmj">
+          ColorfulRainMarks</a> by k0j1 (<a href="https://codepen.io/k0j1">@k0j1</a>)
+          on <a href="https://codepen.io">CodePen</a>.</span>
+        </p>
+        <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+    </div>
+  </div>
+  <!-- 右画面はなし -->
+  <div class="overlay" @click="rightSide = false; leftSide = false" :class="{ 'active': rightSide || leftSide }"></div>
+  </div>    
+
+  <script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.9.4/dist/alpine.js'></script>
+  
+
+</body>
+
+</html>
+ 
