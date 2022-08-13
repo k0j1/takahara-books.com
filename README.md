@@ -8,3 +8,8 @@ https://k0j1.github.io/takahara-books.com/public_html/Script.html
 https://k0j1.github.io/takahara-books.com/public_html/Android/index.html
 
 https://k0j1.github.io/takahara-books.com/CodePenSample.html
+
+# Web3
+
+https://k0j1.github.io/takahara-books.com/public_html/Web3.0/MetaMaskTest.html
+
