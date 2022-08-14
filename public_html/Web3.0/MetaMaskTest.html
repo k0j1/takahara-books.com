@@ -23,6 +23,13 @@
     const ethereumButton = document.querySelector('.enableEthereumButton');
     const showAccount = document.querySelector('.showAccount');
 
+    // MetaMaskチェック
+    if (typeof window.ethereum !== 'undefined') {
+      alert("MetaMaskがインストールされています");
+    } else {
+      alert("MetaMaskをインストールされていません");
+    }
+
     ethereumButton.addEventListener('click', function(event) {
       getAccount();
     });
