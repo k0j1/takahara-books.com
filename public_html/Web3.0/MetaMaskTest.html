@@ -5,28 +5,35 @@
 <head>
 
   <meta charset='UTF-8'>
-  <title>CodePen Demo</title>
+  <title>MetaMaskテスト</title>
 
   <meta name="robots" content="noindex">
 
-  <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
-  <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
-  <link rel="canonical" href="https://codepen.io/k0j1/pen/bGvmNYE">
-
-  
-  
-
   <style class="INLINE_PEN_STYLESHEET_ID">
     body {
-  word-break: break-all;
-  word-wrap: break-word;
-  margin-bottom: 50px;
-}
- 
-textarea {
-  line-height: 1.2em;
-}
+      word-break: break-all;
+      word-wrap: break-word;
+      margin-bottom: 50px;
+    }
+    
+    textarea {
+      line-height: 1.2em;
+    }
   </style>
+  <script>
+    const ethereumButton = document.querySelector('.enableEthereumButton');
+    const showAccount = document.querySelector('.showAccount');
+
+    ethereumButton.addEventListener('click', () => {
+      getAccount();
+    });
+
+    async function getAccount() {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+      showAccount.innerHTML = account;
+    }
+  </script>
 
   
 <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-7549a40147ccd0ba0a6b5373d87e770e49bb4689f1c2dc30cccc7463f207f997.js"></script>
