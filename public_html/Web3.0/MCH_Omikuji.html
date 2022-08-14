@@ -196,23 +196,23 @@
     // メタマスク接続
     async function connectMetaMask()
     {
-        //try {
+        try {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const account = accounts[0];
             console.log(account);
             //showAccount.innerHTML = account;
             let element = document.getElementById('userID');
             element.setAttribute("value", account);
-        //}
-        //catch (err)
-        //{
-        //  if (err.code === 4001) {
-        //    // ユーザーが接続を拒否するとここに来ます
-        //    console.log('Please connect to MetaMask.');
-        //  } else {
-        //    console.error(err);
-        //  }
-        //}
+        }
+        catch (err)
+        {
+            if (err.code === 4001) {
+            // ユーザーが接続を拒否するとここに来ます
+            alert('MetaMaskに接続してください');
+            } else {
+            alert('MetaMaskに接続できません');
+            }
+        }
     }
 
     /////////////////////////////////////////////
