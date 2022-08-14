@@ -267,62 +267,61 @@
     // リストクリア
     function ClearList(objSection)
     {
-    while (objSection.firstChild) {if (window.CP.shouldStopExecution(1)) break;
-        objSection.removeChild(objSection.firstChild);
-    }window.CP.exitedLoop(1);
+        while (objSection.firstChild) {
+            objSection.removeChild(objSection.firstChild);
+        }
     }
 
     /////////////////////////////////////////////
     // ヒーローIDをリスト表示（箇条書き）
     function DispList(Items, strTagBaseID, strHeader, objSection, urlBaseText)
     {
-    // リストクリア
-    ClearList(objSection);
+        // リストクリア
+        ClearList(objSection);
 
-    const myArticle = document.createElement('article');
-    const myH1 = document.createElement('h1');
-    myH1.textContent = strHeader;
-    myArticle.appendChild(myH1);
+        const myArticle = document.createElement('article');
+        const myH1 = document.createElement('h1');
+        myH1.textContent = strHeader;
+        myArticle.appendChild(myH1);
 
-    if (!Items)
-    {
-        const myPara = document.createElement('p');
-        myPara.textContent = "所持していません";
-        myArticle.appendChild(myPara);
-        objSection.appendChild(myArticle);
-    } else
+        if (!Items)
+        {
+            const myPara = document.createElement('p');
+            myPara.textContent = "所持していません";
+            myArticle.appendChild(myPara);
+            objSection.appendChild(myArticle);
+        }
+        else
+        {
+            //const Items = obj[strObjID];
+            console.log('ID数:' + Items.length);
 
-    {
-        //const Items = obj[strObjID];
-        console.log('ID数:' + Items.length);
+            var requests = new Array(Items.length);
+            for (let i = 0; i < Items.length; i++)
+            {if (window.CP.shouldStopExecution(2)) break;
+            //const myList = document.createElement('ul');
+            //const listItem = document.createElement('li');
+            //listItem.textContent = heroes[i];
+            //myList.appendChild(listItem);
+            //myArticle.appendChild(myList);
 
-        var requests = new Array(Items.length);
-        for (let i = 0; i < Items.length; i++)
-        {if (window.CP.shouldStopExecution(2)) break;
-        //const myList = document.createElement('ul');
-        //const listItem = document.createElement('li');
-        //listItem.textContent = heroes[i];
-        //myList.appendChild(listItem);
-        //myArticle.appendChild(myList);
+            let strTagID = strTagBaseID + i;
+            const myImage = new Image();
+            myImage.setAttribute("id", strTagID);
+            myImage.src = "noimage.png";
+            myImage.width = 80; // 横サイズ（px）
+            myImage.height = 80; // 縦サイズ（px）
+            myArticle.appendChild(myImage);
 
-        let strTagID = strTagBaseID + i;
-        const myImage = new Image();
-        myImage.setAttribute("id", strTagID);
-        myImage.src = "noimage.png";
-        myImage.width = 80; // 横サイズ（px）
-        myImage.height = 80; // 縦サイズ（px）
-        myArticle.appendChild(myImage);
+            objSection.appendChild(myArticle);
 
-        objSection.appendChild(myArticle);
-
-        requests[i] = new XMLHttpRequest();
-        //getHeroInfo(requests[i], strTagID, heroes[i]);
-        let urlText = urlBaseText + Items[i];
-        getInfo(requests[i], strTagID, urlText);
-        }window.CP.exitedLoop(2);
+            requests[i] = new XMLHttpRequest();
+            //getHeroInfo(requests[i], strTagID, heroes[i]);
+            let urlText = urlBaseText + Items[i];
+            getInfo(requests[i], strTagID, urlText);
+            }window.CP.exitedLoop(2);
+        }
     }
-    }
-    //# sourceURL=pen.js
     </script>
 
 </body>
