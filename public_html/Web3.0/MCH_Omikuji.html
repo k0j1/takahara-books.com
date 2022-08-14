@@ -250,9 +250,9 @@
     // ヒーローIDをcsv形式で１行表示
     function DispLine(obj)
     {
-        while (header.firstChild) {if (window.CP.shouldStopExecution(0)) break;
+        while (header.firstChild) {
             header.removeChild(header.firstChild);
-        }window.CP.exitedLoop(0);
+        }
         const myArticle = document.createElement('article');
         const myH1 = document.createElement('h1');
         myH1.textContent = "■所持ヒーロー";
@@ -298,28 +298,28 @@
 
             var requests = new Array(Items.length);
             for (let i = 0; i < Items.length; i++)
-            {if (window.CP.shouldStopExecution(2)) break;
-            //const myList = document.createElement('ul');
-            //const listItem = document.createElement('li');
-            //listItem.textContent = heroes[i];
-            //myList.appendChild(listItem);
-            //myArticle.appendChild(myList);
+            {
+                //const myList = document.createElement('ul');
+                //const listItem = document.createElement('li');
+                //listItem.textContent = heroes[i];
+                //myList.appendChild(listItem);
+                //myArticle.appendChild(myList);
 
-            let strTagID = strTagBaseID + i;
-            const myImage = new Image();
-            myImage.setAttribute("id", strTagID);
-            myImage.src = "noimage.png";
-            myImage.width = 80; // 横サイズ（px）
-            myImage.height = 80; // 縦サイズ（px）
-            myArticle.appendChild(myImage);
+                let strTagID = strTagBaseID + i;
+                const myImage = new Image();
+                myImage.setAttribute("id", strTagID);
+                myImage.src = "noimage.png";
+                myImage.width = 80; // 横サイズ（px）
+                myImage.height = 80; // 縦サイズ（px）
+                myArticle.appendChild(myImage);
 
-            objSection.appendChild(myArticle);
+                objSection.appendChild(myArticle);
 
-            requests[i] = new XMLHttpRequest();
-            //getHeroInfo(requests[i], strTagID, heroes[i]);
-            let urlText = urlBaseText + Items[i];
-            getInfo(requests[i], strTagID, urlText);
-            }window.CP.exitedLoop(2);
+                requests[i] = new XMLHttpRequest();
+                //getHeroInfo(requests[i], strTagID, heroes[i]);
+                let urlText = urlBaseText + Items[i];
+                getInfo(requests[i], strTagID, urlText);
+            }
         }
     }
     </script>
