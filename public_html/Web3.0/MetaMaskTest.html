@@ -18,7 +18,13 @@
       line-height: 1.2em;
     }
   </style>
-  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
+</head>
+
+<body>
+  <button class="enableEthereumButton">Enable Ethereum</button>
+  <h2>Account: <span class="showAccount"></span></h2>
+  
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
   <script>
     const ethereumButton = document.querySelector('.enableEthereumButton');
     const showAccount = document.querySelector('.showAccount');
@@ -30,9 +36,12 @@
       alert("MetaMaskをインストールされていません");
     }
 
-    ethereumButton.addEventListener('click', function(event) {
-      getAccount();
-    });
+    if(ethereumButton) 
+    {
+      ethereumButton.addEventListener('click', () => {
+        getAccount();
+      });
+    }
 
     async function getAccount() {
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -40,12 +49,6 @@
       showAccount.innerHTML = account;
     }
   </script>
-</head>
-
-<body>
-  <button class="enableEthereumButton">Enable Ethereum</button>
-  <h2>Account: <span class="showAccount"></span></h2>
-  
 </body>
 
 </html>
