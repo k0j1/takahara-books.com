@@ -91,176 +91,176 @@
 
     function init()
     {
-    let strErrText = "";
-    if (typeof window.ethereum !== 'undefined') {
-        console.log('MetaMask is installed!');
-        strErrText = "MetaMask接続可能";
-    } else {
-        strErrText = "MetaMask接続できません";
-    }
-    let errConnectText = document.getElementById('.errConnectText');
-    if (errConnectText)
-    {
-        //const errText = document.createElement('span');
-        errConnectText.setAttribute("style", "color:white;");
-        errConnectText.textContent(strErrText);
-        //errConnectText.appendChild(errText);
-    }
+        let strErrText = "";
+        if (typeof window.ethereum !== 'undefined') {
+            console.log('MetaMask is installed!');
+            strErrText = "MetaMask接続可能";
+        } else {
+            strErrText = "MetaMask接続できません";
+        }
+        let errConnectText = document.getElementById('.errConnectText');
+        if (errConnectText)
+        {
+            //const errText = document.createElement('span');
+            errConnectText.setAttribute("style", "color:white;");
+            errConnectText.textContent(strErrText);
+            //errConnectText.appendChild(errText);
+        }
 
-    // ユーザーID入力領域表示
-    //let userIDdiv = document.getElementById('.user_id');
-    //userIDdiv.setAttribute("style", "display:block;");
-    DispID(val_userID);
+        // ユーザーID入力領域表示
+        //let userIDdiv = document.getElementById('.user_id');
+        //userIDdiv.setAttribute("style", "display:block;");
+        DispID(val_userID);
 
-    connectButton.addEventListener('click', function (event) {
-        // 今日の運勢表示
-        let today = document.getElementById("today_fortune");
-        today.setAttribute("style", "display:block;");
-        connectMetaMask();
-    });
+        connectButton.addEventListener('click', function (event) {
+            // 今日の運勢表示
+            let today = document.getElementById("today_fortune");
+            today.setAttribute("style", "display:block;");
+            connectMetaMask();
+        });
     }
 
     /////////////////////////////////////////////
     // メタマスク接続
     async function connectMetaMask()
     {
-    //try {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const account = accounts[0];
-    console.log(account);
-    showAccount.innerHTML = account;
-    //}
-    //catch (err)
-    //{
-    //  if (err.code === 4001) {
-    //    // ユーザーが接続を拒否するとここに来ます
-    //    console.log('Please connect to MetaMask.');
-    //  } else {
-    //    console.error(err);
-    //  }
-    //}
-    }
+        //try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        console.log(account);
+        showAccount.innerHTML = account;
+        //}
+        //catch (err)
+        //{
+        //  if (err.code === 4001) {
+        //    // ユーザーが接続を拒否するとここに来ます
+        //    console.log('Please connect to MetaMask.');
+        //  } else {
+        //    console.error(err);
+        //  }
+        //}
+        }
 
     /////////////////////////////////////////////
     // JSON取得：ユーザー所持ヒーローID
     function getIDs()
     {
-    let element = document.getElementById('userID');
-    // ヒーローID一覧取得
-    let urlText = reqHeroIDURL + element.value;
-    console.log(urlText);
-    let request = new XMLHttpRequest();
-    request.open('GET', urlText);
-    request.responseType = 'json';
-    request.send();
-    request.onload = function ()
-    {
-        var bDisp = false;
-        const HerosID = request.response;
-        if (HerosID)
+        let element = document.getElementById('userID');
+        // ヒーローID一覧取得
+        let urlText = reqHeroIDURL + element.value;
+        console.log(urlText);
+        let request = new XMLHttpRequest();
+        request.open('GET', urlText);
+        request.responseType = 'json';
+        request.send();
+        request.onload = function ()
         {
-        const Items = HerosID['hero_ids'];
-        console.log('ID数:' + Items.length);
-        if (Items.length > 0)
-        {
-            bDisp = true;
-            DispList(Items, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
-        }
-        }
-        if (!bDisp)
-        {
-        DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
-        }
-    };
-    request.onerror = function () {
-        DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
-    };
-    // ヒーローID一覧取得
-    urlText = reqExtIDURL + element.value;
-    console.log(urlText);
-    let requestExt = new XMLHttpRequest();
-    requestExt.open('GET', urlText);
-    requestExt.responseType = 'json';
-    requestExt.send();
-    requestExt.onload = function () {
-        const ExtsID = requestExt.response;
-        if (ExtsID)
-        {
-        const Items = ExtsID['extension_ids'];
-        //console.log('ID数:'+Items.length)
-        DispList(Items, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
-        } else
-
-        {
-        DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
-        }
-    };
-    request.onerror = function () {
-        DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
-    };
-    // 今日の運勢表示
-    let today = document.getElementById("today_fortune");
-    today.setAttribute("style", "display:block;");
+            var bDisp = false;
+            const HerosID = request.response;
+            if (HerosID)
+            {
+                const Items = HerosID['hero_ids'];
+                console.log('ID数:' + Items.length);
+                if (Items.length > 0)
+                {
+                    bDisp = true;
+                    DispList(Items, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+                }
+            }
+            if (!bDisp)
+            {
+                DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+            }
+        };
+        request.onerror = function () {
+            DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+        };
+        // ヒーローID一覧取得
+        urlText = reqExtIDURL + element.value;
+        console.log(urlText);
+        let requestExt = new XMLHttpRequest();
+        requestExt.open('GET', urlText);
+        requestExt.responseType = 'json';
+        requestExt.send();
+        requestExt.onload = function () {
+            const ExtsID = requestExt.response;
+            if (ExtsID)
+            {
+                const Items = ExtsID['extension_ids'];
+                //console.log('ID数:'+Items.length)
+                DispList(Items, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+            }
+            else
+            {
+                DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+            }
+        };
+        request.onerror = function () {
+            DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+        };
+        // 今日の運勢表示
+        let today = document.getElementById("today_fortune");
+        today.setAttribute("style", "display:block;");
     }
     /////////////////////////////////////////////
     // JSON取得：ヒーロー情報
     function getInfo(reqObj, strTagID, urlText)
     {
-    console.log(urlText);
-    reqObj.open('GET', urlText);
-    reqObj.responseType = 'json';
-    reqObj.send();
-    reqObj.onload = function () {
-        const getInfo = reqObj.response;
-        console.log(strTagID + ':' + getInfo.image);
-        let myImage = document.getElementById(strTagID);
-        myImage.src = getInfo.image; // 画像パス
-    };
+        console.log(urlText);
+        reqObj.open('GET', urlText);
+        reqObj.responseType = 'json';
+        reqObj.send();
+        reqObj.onload = function () {
+            const getInfo = reqObj.response;
+            console.log(strTagID + ':' + getInfo.image);
+            let myImage = document.getElementById(strTagID);
+            myImage.src = getInfo.image; // 画像パス
+        };
     }
 
     /////////////////////////////////////////////
     // JSON取得：ヒーロー情報
     function getHeroInfo(reqObj, strTagID, strHeroID)
     {
-    let urlText = reqHeroInfoURL + strHeroID;
-    getInfo(reqObj, strTagID, urlText);
+        let urlText = reqHeroInfoURL + strHeroID;
+        getInfo(reqObj, strTagID, urlText);
     }
     /////////////////////////////////////////////
     // JSON取得：エクステンション情報
     function getExtInfo(reqObj, strTagID, strExtID)
     {
-    let urlText = reqExtInfoURL + strExtID;
-    getInfo(reqObj, strTagID, urlText);
+        let urlText = reqExtInfoURL + strExtID;
+        getInfo(reqObj, strTagID, urlText);
     }
 
     /////////////////////////////////////////////
     // ユーザーIDの入力領域を表示
     function DispID(strID)
     {
-    const inputID = document.createElement('input');
-    inputID.setAttribute("id", "userID");
-    inputID.setAttribute("type", "text");
-    inputID.setAttribute("maxlength", "10");
-    inputID.setAttribute("size", "10");
-    inputID.setAttribute("value", strID);
-    id.appendChild(inputID);
+        const inputID = document.createElement('input');
+        inputID.setAttribute("id", "userID");
+        inputID.setAttribute("type", "text");
+        inputID.setAttribute("maxlength", "10");
+        inputID.setAttribute("size", "10");
+        inputID.setAttribute("value", strID);
+        id.appendChild(inputID);
     }
 
     /////////////////////////////////////////////
     // ヒーローIDをcsv形式で１行表示
     function DispLine(obj)
     {
-    while (header.firstChild) {if (window.CP.shouldStopExecution(0)) break;
-        header.removeChild(header.firstChild);
-    }window.CP.exitedLoop(0);
-    const myArticle = document.createElement('article');
-    const myH1 = document.createElement('h1');
-    myH1.textContent = "■所持ヒーロー";
-    header.appendChild(myH1);
+        while (header.firstChild) {if (window.CP.shouldStopExecution(0)) break;
+            header.removeChild(header.firstChild);
+        }window.CP.exitedLoop(0);
+        const myArticle = document.createElement('article');
+        const myH1 = document.createElement('h1');
+        myH1.textContent = "■所持ヒーロー";
+        header.appendChild(myH1);
 
-    const myPara = document.createElement('p');
-    myPara.textContent = obj['hero_ids'];
-    header.appendChild(myPara);
+        const myPara = document.createElement('p');
+        myPara.textContent = obj['hero_ids'];
+        header.appendChild(myPara);
     }
 
     /////////////////////////////////////////////
