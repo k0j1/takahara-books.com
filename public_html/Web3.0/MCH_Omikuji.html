@@ -4,71 +4,145 @@
     <meta charset="UTF-8">
     <title>CodePen - マイクリユーザー検索β版</title>
     <style>
-        * {
+    * {
+        outline:none;
+        box-sizing:border-box;
         text-align:center;
-        }
+    }
 
-        body
-        {
+    body
+    {
         color:white;
         background: black;
-        }
+    }
 
-        #today_fortune
-        {
+    #main
+    {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    #today_fortune
+    {
         display:none;
-        }
+    }
 
 
-        button{
+    button
+    {
         position: relative;
         outline: none;
         cursor: pointer;
         background: none;
         border: none;
-        }
+    }
+
+    .userid_box
+    {
+        color:white;
+        display: flex; /*アイコン、テキストボックスを調整する*/
+        align-items: center; /*アイコン、テキストボックスを縦方向の中心に*/
+        justify-content: center; /*アイコン、テキストボックスを横方向の中心に*/
+        width: 320px;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+    }
+
+    .userid_inner
+    {
+        width: 100%;
+        height: 100%;
+        background-color: transparent; /*.password_boxの枠線お角一部被るため透明に*/
+        position: relative;
+    }
+
+    #userID{
+        position: absolute;
+        z-index: 1; /*.password_stringよりも上に配置*/
+        color:white;
+        text-align:left;
+        height: 100%;
+        width: 100%;
+        top: 0; left: 0; bottom: 0; right: 0;
+        border: none; /*枠線非表示*/
+        outline: none; /*フォーカス時の枠線非表示*/
+        padding: 0 10px;
+        font-size: 12px;
+        background-color: transparent; /*後ろの.password_stringを見せるため*/
+        box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+    }
+
+    .userid_string{
+        position: absolute;
+        height: 100%;
+        width: 240px; /*文字列分の長さ*/
+        top: 0; left: 0; bottom: 0; right: 0;
+        padding-left: 10px; /*position: absolute;でのmarginは親要素はみ出す*/
+        font-size: 16px;
+        line-height: 50px; /*文字列を縦方向にmiddleに見せるため*/
+        background-color: transparent;
+        color: #80868b;
+        box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+        transition: all 0.2s;
+        -webkit-transition: all 0.2s;
+    }
+
+    /*アニメーション*/
+    #userID:not(:placeholder-shown) + .userid_string,
+    #userID:focus + .userid_string
+    {
+        color: #3be5ae;
+        font-size: 10px;
+        line-height: 10px;
+        width: 150px;
+        height: 10px;
+        padding: 0 2px;
+        background-color: black;
+        transform:translate3d(5px, -6px, 0);
+    }
     </style>
 </head>
 
 <body translate="no" >
-  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
 
     <img src="https://www.takahara-books.com/Image/MCH/banner.png" width=320px/>
 
+    <div id="main">
     <H1>マイクリユーザー検索</H1>
-
+    
     <!-- 接続ボタン -->
     <button class="enableEthereumButton"><img src="https://www.takahara-books.com/Image/MCH/connect.png" width=120px></button>
     <h2 id="errConnectText"></h2>
-
-    <br> 
-    <br>
-
+    
     <div id="user_id">
-    <label>ユーザーID：
-        <userID></userID>
-        <input type="button" value="取得" onclick="getIDs()" />
-    </label>
-    <br>
-    <br>
-    <br>
+      <div class="userid_box">
+        <div class="userid_inner">
+          <input id="userID" type="text" maxlength=42 size=42 placeholder=" ">
+          <div class="userid_string">ユーザーID or アドレス(0x)</div>
+        </div>
+      </div>
+      <input type="button" value="取得" onclick="getIDs()" />
+      <br>
+      <br>
     </div>
-
+    
     <div id="today_fortune">
-    <h2>Account: <span class="showAccount"></span></h2>
-    <a href="https://codepen.io/k0j1/full/eYMMpRj"><img src="https://www.takahara-books.com/Image/MCH/draw.png" width=180px/></a></div>
+      <a href="https://codepen.io/k0j1/full/eYMMpRj"><img src="https://www.takahara-books.com/Image/MCH/draw.png" width=180px/></a></div>
     <br>
     <br>
-
+    
     <OwnHeroHeader></OwnHeroHeader>
-
+    
     <OwnHeroData></OwnHeroData>
-
+    
     <br>
-
+    
     <OwnExtHeader></OwnExtHeader>
-
+    
     <OwnExtData></OwnExtData>
+    
+    </div>
 
     <script id="rendered-js" >
     //*** 書換タグ定義
@@ -81,16 +155,20 @@
     const showAccount = document.querySelector('.showAccount');
 
     //*** デフォルト定数
-    let val_userID = '10001';
+    let val_userID = '';
     let reqHeroIDURL = 'https://www.mycryptoheroes.net/api/proxy/mch/heroes/';
+    let reqHeroIDURLad = 'https://www.mycryptoheroes.net/api/proxy/HeroAsset/heroes/'
     let reqHeroInfoURL = "https://www.mycryptoheroes.net/metadata/hero/";
     let reqExtIDURL = 'https://www.mycryptoheroes.net/api/proxy/mch/extensions/';
+    let reqExtIDURLad = 'https://www.mycryptoheroes.net/api/proxy/ExtensionAsset/extensions/'
     let reqExtInfoURL = "https://www.mycryptoheroes.net/metadata/extension/";
+    let reqUserInfoURL = 'https://www.mycryptoheroes.net/api/proxy/mch/users/';
 
     init();
 
     function init()
     {
+        // Metamaskチェック
         let strErrText = "";
         if (typeof window.ethereum !== 'undefined') {
             console.log('MetaMask is installed!');
@@ -99,20 +177,14 @@
             strErrText = "MetaMask接続できません";
         }
         let errConnectText = document.getElementById('.errConnectText');
-        if (errConnectText)
+        if(errConnectText)
         {
-            //const errText = document.createElement('span');
             errConnectText.setAttribute("style", "color:white;");
             errConnectText.textContent(strErrText);
-            //errConnectText.appendChild(errText);
         }
-
-        // ユーザーID入力領域表示
-        //let userIDdiv = document.getElementById('.user_id');
-        //userIDdiv.setAttribute("style", "display:block;");
-        DispID(val_userID);
-
-        connectButton.addEventListener('click', function (event) {
+        // 接続ボタン設定
+        connectButton.addEventListener('click', function(event)
+        {
             // 今日の運勢表示
             let today = document.getElementById("today_fortune");
             today.setAttribute("style", "display:block;");
@@ -125,10 +197,12 @@
     async function connectMetaMask()
     {
         //try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const account = accounts[0];
-        console.log(account);
-        showAccount.innerHTML = account;
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const account = accounts[0];
+            console.log(account);
+            //showAccount.innerHTML = account;
+            let element = document.getElementById('userID');
+            element.setAttribute("value", account);
         //}
         //catch (err)
         //{
@@ -139,83 +213,126 @@
         //    console.error(err);
         //  }
         //}
-        }
+    }
 
     /////////////////////////////////////////////
     // JSON取得：ユーザー所持ヒーローID
     function getIDs()
     {
         let element = document.getElementById('userID');
-        // ヒーローID一覧取得
-        let urlText = reqHeroIDURL + element.value;
-        console.log(urlText);
-        let request = new XMLHttpRequest();
-        request.open('GET', urlText);
-        request.responseType = 'json';
-        request.send();
-        request.onload = function ()
+        console.log("UserID length : "+element.value.length);
+        if(element.value.length < 10)
         {
-            var bDisp = false;
-            const HerosID = request.response;
-            if (HerosID)
-            {
-                const Items = HerosID['hero_ids'];
-                console.log('ID数:' + Items.length);
-                if (Items.length > 0)
-                {
-                    bDisp = true;
-                    DispList(Items, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
-                }
-            }
-            if (!bDisp)
-            {
-                DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
-            }
-        };
-        request.onerror = function () {
-            DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
-        };
-        // ヒーローID一覧取得
-        urlText = reqExtIDURL + element.value;
-        console.log(urlText);
-        let requestExt = new XMLHttpRequest();
-        requestExt.open('GET', urlText);
-        requestExt.responseType = 'json';
-        requestExt.send();
-        requestExt.onload = function () {
-            const ExtsID = requestExt.response;
-            if (ExtsID)
-            {
-                const Items = ExtsID['extension_ids'];
-                //console.log('ID数:'+Items.length)
-                DispList(Items, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
-            }
-            else
-            {
-                DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
-            }
-        };
-        request.onerror = function () {
-            DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
-        };
+            // ユーザーIDでの検索
+            let urlHeroIDURL = reqHeroIDURL + element.value;
+            let urlExtIDURL = reqExtIDURL + element.value;
+            reqInfo(urlHeroIDURL, urlExtIDURL);
+        }
+        else
+        {
+            // アドレスでの検索
+            let urlUserInfoURL = reqUserInfoURL + element.value;
+            reqUserInfo(urlUserInfoURL);
+        }
+            
         // 今日の運勢表示
         let today = document.getElementById("today_fortune");
         today.setAttribute("style", "display:block;");
+    }
+    function reqUserInfo(urlUserInfoURL)
+    {
+        // ユーザー情報取得
+        console.log(urlUserInfoURL)
+        let request = new XMLHttpRequest();
+        request.open('GET', urlUserInfoURL);
+        request.responseType = 'json';
+        request.send();
+        request.onload = function()
+        {
+            const UserInfo = request.response;
+            if(UserInfo)
+            {
+            const Info = UserInfo['user_data'];
+            console.log('Info.uid:'+Info.uid);
+            console.log('Info.name:'+Info.name);
+            //if(Info.uid.length>0)
+            {
+                let urlHeroIDURL = reqHeroIDURL + Info.uid;
+                let urlExtIDURL = reqExtIDURL + Info.uid;
+                console.log(urlHeroIDURL);
+                console.log(urlExtIDURL);
+                reqInfo(urlHeroIDURL, urlExtIDURL);        
+            }
+            }
+        };
+    }
+    function reqInfo(urlHeroIDURL, urlExtIDURL)
+    {
+        // ヒーローID一覧取得
+        console.log(urlHeroIDURL)
+        let request = new XMLHttpRequest();
+        request.open('GET', urlHeroIDURL);
+        request.responseType = 'json';
+        request.send();
+        request.onload = function()
+        {
+            var bDisp = false; 
+            const HerosID = request.response;
+            if(HerosID)
+            {
+            const Items = HerosID['hero_ids'];
+            console.log('ID数:'+Items.length);
+            if(Items.length>0)
+            {
+                bDisp = true;
+                DispList(Items, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);      
+            }
+            }
+            if(!bDisp)
+            {
+            DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+            }
+        };
+        request.onerror = function(){
+            DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+        }
+        // ヒーローID一覧取得
+        console.log(urlExtIDURL)
+        let requestExt = new XMLHttpRequest();
+        requestExt.open('GET', urlExtIDURL);
+        requestExt.responseType = 'json';
+        requestExt.send();
+        requestExt.onload = function() {
+            const ExtsID = requestExt.response;
+            if(ExtsID)
+            {
+            const Items = ExtsID['extension_ids'];
+            //console.log('ID数:'+Items.length)
+            DispList(Items, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);      
+            }
+            else
+            {
+            DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+            }
+        };
+        request.onerror = function(){
+            DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+        }
     }
     /////////////////////////////////////////////
     // JSON取得：ヒーロー情報
     function getInfo(reqObj, strTagID, urlText)
     {
-        console.log(urlText);
+        console.log(urlText)
         reqObj.open('GET', urlText);
         reqObj.responseType = 'json';
         reqObj.send();
-        reqObj.onload = function () {
+        reqObj.onload = function() {
             const getInfo = reqObj.response;
-            console.log(strTagID + ':' + getInfo.image);
+            console.log(strTagID+':'+getInfo.image)
             let myImage = document.getElementById(strTagID);
             myImage.src = getInfo.image; // 画像パス
-        };
+        };  
     }
 
     /////////////////////////////////////////////
@@ -237,13 +354,15 @@
     // ユーザーIDの入力領域を表示
     function DispID(strID)
     {
-        const inputID = document.createElement('input');
+        //const inputID = document.createElement('input');
+        let inputID = document.getElementById("userID");
         inputID.setAttribute("id", "userID");
         inputID.setAttribute("type", "text");
-        inputID.setAttribute("maxlength", "10");
-        inputID.setAttribute("size", "10");
+        inputID.setAttribute("maxlength", "42");
+        inputID.setAttribute("size", "42");
         inputID.setAttribute("value", strID);
-        id.appendChild(inputID);
+        inputID.setAttribute("placeholder", "ユーザーID or アドレス(0x)")
+        //id.appendChild(inputID);
     }
 
     /////////////////////////////////////////////
@@ -257,7 +376,7 @@
         const myH1 = document.createElement('h1');
         myH1.textContent = "■所持ヒーロー";
         header.appendChild(myH1);
-
+        
         const myPara = document.createElement('p');
         myPara.textContent = obj['hero_ids'];
         header.appendChild(myPara);
@@ -269,7 +388,7 @@
     {
         while (objSection.firstChild) {
             objSection.removeChild(objSection.firstChild);
-        }
+        }  
     }
 
     /////////////////////////////////////////////
@@ -278,47 +397,47 @@
     {
         // リストクリア
         ClearList(objSection);
-
+        
         const myArticle = document.createElement('article');
         const myH1 = document.createElement('h1');
         myH1.textContent = strHeader;
         myArticle.appendChild(myH1);
-
-        if (!Items)
+        
+        if(!Items)
         {
             const myPara = document.createElement('p');
             myPara.textContent = "所持していません";
-            myArticle.appendChild(myPara);
+            myArticle.appendChild(myPara);    
             objSection.appendChild(myArticle);
         }
         else
         {
             //const Items = obj[strObjID];
-            console.log('ID数:' + Items.length);
+            console.log('ID数:'+Items.length)
 
-            var requests = new Array(Items.length);
+            var requests　=　new Array(Items.length);
             for (let i = 0; i < Items.length; i++)
-            {
-                //const myList = document.createElement('ul');
-                //const listItem = document.createElement('li');
-                //listItem.textContent = heroes[i];
-                //myList.appendChild(listItem);
-                //myArticle.appendChild(myList);
+            {    
+            //const myList = document.createElement('ul');
+            //const listItem = document.createElement('li');
+            //listItem.textContent = heroes[i];
+            //myList.appendChild(listItem);
+            //myArticle.appendChild(myList);
 
-                let strTagID = strTagBaseID + i;
-                const myImage = new Image();
-                myImage.setAttribute("id", strTagID);
-                myImage.src = "noimage.png";
-                myImage.width = 80; // 横サイズ（px）
-                myImage.height = 80; // 縦サイズ（px）
-                myArticle.appendChild(myImage);
+            let strTagID = strTagBaseID + i;
+            const myImage = new Image();
+            myImage.setAttribute("id", strTagID);
+            myImage.src = "noimage.png";
+            myImage.width = 80; // 横サイズ（px）
+            myImage.height = 80; // 縦サイズ（px）
+            myArticle.appendChild(myImage);
 
-                objSection.appendChild(myArticle);
+            objSection.appendChild(myArticle);
 
-                requests[i] = new XMLHttpRequest();
-                //getHeroInfo(requests[i], strTagID, heroes[i]);
-                let urlText = urlBaseText + Items[i];
-                getInfo(requests[i], strTagID, urlText);
+            requests[i] = new XMLHttpRequest();
+            //getHeroInfo(requests[i], strTagID, heroes[i]);
+            let urlText = urlBaseText + Items[i];
+            getInfo(requests[i], strTagID, urlText);
             }
         }
     }
