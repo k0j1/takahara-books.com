@@ -10,6 +10,11 @@
         box-sizing:border-box;
         text-align:center;
     }
+    *, *::before, *::after {
+        border-width: 0;
+        border-style: solid;
+        box-sizing: border-box;
+    }
 
     body
     {
@@ -19,28 +24,27 @@
 
     #main
     {
-        max-width: 320px;
-        margin: 0 auto;
+    max-width: 320px;
+    margin: 0 auto;
     }
 
     #today_fortune
     {
-        display:none;
+    display:none;
     }
 
 
-    button
-    {
-        position: relative;
-        outline: none;
-        cursor: pointer;
-        background: none;
-        border: none;
+    button{
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    background: none;
+    border: none;
     }
 
     .userid_box
     {
-        color:white;
+    color:white;
         display: flex; /*アイコン、テキストボックスを調整する*/
         align-items: center; /*アイコン、テキストボックスを縦方向の中心に*/
         justify-content: center; /*アイコン、テキストボックスを横方向の中心に*/
@@ -102,6 +106,116 @@
         background-color: black;
         transform:translate3d(5px, -6px, 0);
     }
+
+    .tooltip1{
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+    }
+    .tooltip1 p{
+        margin:0;
+        padding:0;
+    }
+    .description1 {
+        display: none;
+        position: absolute;
+        padding: 10px;
+        font-size: 12px;
+        line-height: 1.6em;
+        color: #fff;
+        border-radius: 5px;
+        background: #000;
+        width: 100px;
+    }
+    .description1:before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        border: 15px solid transparent;
+        border-top: 15px solid #000;
+        margin-left: -15px;
+    }
+    .tooltip1:hover .description1{
+        display: inline-block;
+        top: -70px;
+        left: -30px;
+    }
+
+    .main_header {
+        position: sticky;
+        height: 60px;
+        top: 0px;
+        z-index: 1100;
+        background: #141416;
+    }
+
+    .css-1r51x5v {
+        display: -webkit-inline-box;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        position: relative;
+        white-space: nowrap;
+        vertical-align: middle;
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        width: auto;
+        font-family: Sen,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+        font-weight: 700;
+        line-height: 1.14;
+        transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+        transition-duration: 200ms;
+        height: 3rem;
+        min-width: 3rem;
+        -webkit-padding-start: 1.5rem;
+        padding-inline-start: 1.5rem;
+        -webkit-padding-end: 1.5rem;
+        padding-inline-end: 1.5rem;
+        -font-size: sm;
+        padding: 0px;
+        font-size: 1.5rem;
+    }
+
+    .css-ip97q7 {
+        opacity: 1;
+        border: 0;
+        border-color: inherit;
+        border-style: solid;
+        border-bottom-width: 1px;
+        width: 100%;
+    }
+
+    hr {
+        border-top-width: 1px;
+        box-sizing: content-box;
+        margin: 0;
+        height: 0;
+        color: inherit;
+        overflow: visible;
+        display: block;
+        unicode-bidi: isolate;
+        margin-block-start: 0.5em;
+        margin-block-end: 0.5em;
+        margin-inline-start: auto;
+        margin-inline-end: auto;
+    }
     </style>
 </head>
 
@@ -109,44 +223,43 @@
 
     <img src="https://www.takahara-books.com/Image/MCH/banner.png" width=320px/>
 
-    <div id="main">
-    <H1>マイクリユーザー検索</H1>
-    
-    <!-- 接続ボタン -->
-    <button class="enableEthereumButton"><img src="https://www.takahara-books.com/Image/MCH/connect.png" width=120px></button>
-    <div style="font-size:9px;">※メタマスクからデータをよみこみます</div>
-    <h2 id="errConnectText"></h2>
-    
-    <div id="user_id">
-      <div class="userid_box">
-        <div class="userid_inner">
-          <input id="userID" type="text" maxlength=42 size=42 placeholder=" ">
-          <div class="userid_string">ユーザーID or アドレス(0x)</div>
+    <div id="main">    
+        <!-- 接続ボタン -->
+        <button class="enableEthereumButton"><img src="https://www.takahara-books.com/Image/MCH/connect.png" width=120px></button>
+        <div style="font-size:9px;">※メタマスクからETHアドレスをよみこみます</div>
+        <!--
+        <button class="enableEthereumButton"><img src="https://www.takahara-books.com/Image/MCH/connect.png" width=120px></button>
+        -->
+        <h2 id="errConnectText"></h2>
+        
+        <div id="user_id">
+        <div class="userid_box">
+            <div class="userid_inner">
+            <input id="userID" type="text" maxlength=42 size=42 placeholder=" ">
+            <div class="userid_string">ユーザーID or アドレス(0x)</div>
+            </div>
         </div>
-      </div>
-      <input type="button" value="検索" onclick="getIDs()" />
-      <div style="font-size:9px;">※マイクリのユーザーIDもしくはETHアドレスからデータを取得します</div>
-      <br>
-      <br>
+        <input type="button" value="検索" onclick="getIDs()" />
+        <div style="font-size:9px;">※マイクリのユーザーIDもしくはETHアドレスからデータを取得します</div>
+        <br>
+        <br>
+        </div>
+        
+        <div id="today_fortune"></div>
+        <br>
+        <br>
+        
+        <OwnHeroHeader></OwnHeroHeader>
+        
+        <OwnHeroData></OwnHeroData>
+        
+        <br>
+        
+        <OwnExtHeader></OwnExtHeader>
+        
+        <OwnExtData></OwnExtData>        
     </div>
     
-    <div id="today_fortune">
-      <a href="https://codepen.io/k0j1/full/eYMMpRj"><img src="https://www.takahara-books.com/Image/MCH/draw.png" width=180px/></a></div>
-    <br>
-    <br>
-    
-    <OwnHeroHeader></OwnHeroHeader>
-    
-    <OwnHeroData></OwnHeroData>
-    
-    <br>
-    
-    <OwnExtHeader></OwnExtHeader>
-    
-    <OwnExtData></OwnExtData>
-    
-    </div>
-
     <script id="rendered-js" >
     //*** 書換タグ定義
     const id = document.querySelector('userID');
@@ -171,276 +284,308 @@
 
     function init()
     {
-        // Metamaskチェック
-        let strErrText = "";
-        if (typeof window.ethereum !== 'undefined') {
-            console.log('MetaMask is installed!');
-            strErrText = "MetaMask接続可能";
-        } else {
-            strErrText = "MetaMask接続できません";
-        }
-        let errConnectText = document.getElementById('.errConnectText');
-        if(errConnectText)
-        {
-            errConnectText.setAttribute("style", "color:white;");
-            errConnectText.textContent(strErrText);
-        }
-        // 接続ボタン設定
-        connectButton.addEventListener('click', function(event)
-        {
-            // 今日の運勢表示
-            let today = document.getElementById("today_fortune");
-            today.setAttribute("style", "display:block;");
-            connectMetaMask();
-        });
+    // Metamaskチェック
+    let strErrText = "";
+    if (typeof window.ethereum !== 'undefined') {
+        console.log('MetaMask is installed!');
+        strErrText = "MetaMask接続可能";
+    } else {
+        strErrText = "MetaMask接続できません";
+    }
+    let errConnectText = document.getElementById('.errConnectText');
+    if(errConnectText)
+    {
+        errConnectText.setAttribute("style", "color:white;");
+        errConnectText.textContent(strErrText);
+    }
+    // 接続ボタン設定
+    connectButton.addEventListener('click', function(event)
+    {
+        // 今日の運勢表示
+        let today = document.getElementById("today_fortune");
+        today.setAttribute("style", "display:block;");
+        connectMetaMask();
+    });
     }
 
     /////////////////////////////////////////////
     // メタマスク接続
     async function connectMetaMask()
     {
-        try {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const account = accounts[0];
-            console.log(account);
-            //showAccount.innerHTML = account;
-            let element = document.getElementById('userID');
-            element.setAttribute("value", account);
+    try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        console.log(account);
+        //showAccount.innerHTML = account;
+        let element = document.getElementById('userID');
+        element.setAttribute("value", account);
+    }
+    catch (err)
+    {
+        if (err.code === 4001) {
+        // ユーザーが接続を拒否するとここに来ます
+        alert('MetaMaskに接続してください');
+        } else {
+        alert('MetaMaskに接続できません');
         }
-        catch (err)
-        {
-            if (err.code === 4001) {
-            // ユーザーが接続を拒否するとここに来ます
-            alert('MetaMaskに接続してください');
-            } else {
-            alert('MetaMaskに接続できません');
-            }
-        }
+    }
+    }
+
+    function dispFortune(userID)
+    {
+    // 今日の運勢表示
+    let today = document.getElementById("today_fortune");
+    today.setAttribute("style", "display:block;");
+    const ftLink = document.createElement('a');
+    ftLink.href = "https://codepen.io/k0j1/full/eYMMpRj?id=" + userID;
+    const ftImage = document.createElement('img');
+    ftImage.src = "https://www.takahara-books.com/Image/MCH/draw.png";
+    ftImage.width = 180;
+    ftLink.appendChild(ftImage);      
+    today.appendChild(ftLink);
     }
 
     /////////////////////////////////////////////
     // JSON取得：ユーザー所持ヒーローID
     function getIDs()
     {
-        let element = document.getElementById('userID');
-        console.log("UserID length : "+element.value.length);
-        if(element.value.length < 10)
-        {
-            // ユーザーIDでの検索
-            let urlHeroIDURL = reqHeroIDURL + element.value;
-            let urlExtIDURL = reqExtIDURL + element.value;
-            reqInfo(urlHeroIDURL, urlExtIDURL);
-        }
-        else
-        {
-            // アドレスでの検索
-            let urlUserInfoURL = reqUserInfoURL + element.value;
-            reqUserInfo(urlUserInfoURL);
-        }
-            
+    let element = document.getElementById('userID');
+    console.log("UserID length : "+element.value.length);
+    if(element.value.length < 10)
+    {
+        // ユーザーIDでの検索
+        let urlHeroIDURL = reqHeroIDURL + element.value;
+        let urlExtIDURL = reqExtIDURL + element.value;
+        reqInfo(urlHeroIDURL, urlExtIDURL);
         // 今日の運勢表示
-        let today = document.getElementById("today_fortune");
-        today.setAttribute("style", "display:block;");
+        dispFortune(element.value);
+    }
+    else
+    {
+        // アドレスでの検索
+        let urlUserInfoURL = reqUserInfoURL + element.value;
+        reqUserInfo(urlUserInfoURL);
+    }
     }
     function reqUserInfo(urlUserInfoURL)
     {
-        // ユーザー情報取得
-        console.log(urlUserInfoURL)
-        let request = new XMLHttpRequest();
-        request.open('GET', urlUserInfoURL);
-        request.responseType = 'json';
-        request.send();
-        request.onload = function()
+    // ユーザー情報取得
+    console.log(urlUserInfoURL)
+    let request = new XMLHttpRequest();
+    request.open('GET', urlUserInfoURL);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function()
+    {
+        const UserInfo = request.response;
+        if(UserInfo)
         {
-            const UserInfo = request.response;
-            if(UserInfo)
-            {
-            const Info = UserInfo['user_data'];
-            console.log('Info.uid:'+Info.uid);
-            console.log('Info.name:'+Info.name);
-            //if(Info.uid.length>0)
-            {
-                let urlHeroIDURL = reqHeroIDURL + Info.uid;
-                let urlExtIDURL = reqExtIDURL + Info.uid;
-                console.log(urlHeroIDURL);
-                console.log(urlExtIDURL);
-                reqInfo(urlHeroIDURL, urlExtIDURL);        
-            }
-            }
-        };
+        const Info = UserInfo['user_data'];
+        console.log('Info.uid:'+Info.uid);
+        console.log('Info.name:'+Info.name);
+        //if(Info.uid.length>0)
+        {
+            let urlHeroIDURL = reqHeroIDURL + Info.uid;
+            let urlExtIDURL = reqExtIDURL + Info.uid;
+            console.log(urlHeroIDURL);
+            console.log(urlExtIDURL);
+            reqInfo(urlHeroIDURL, urlExtIDURL);        
+        }
+        // 今日の運勢表示
+        dispFortune(Info.uid);
+        }
+    };
     }
     function reqInfo(urlHeroIDURL, urlExtIDURL)
     {
-        // ヒーローID一覧取得
-        console.log(urlHeroIDURL)
-        let request = new XMLHttpRequest();
-        request.open('GET', urlHeroIDURL);
-        request.responseType = 'json';
-        request.send();
-        request.onload = function()
+    // ヒーローID一覧取得
+    console.log(urlHeroIDURL)
+    let request = new XMLHttpRequest();
+    request.open('GET', urlHeroIDURL);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function()
+    {
+        var bDisp = false; 
+        const HerosID = request.response;
+        if(HerosID)
         {
-            var bDisp = false; 
-            const HerosID = request.response;
-            if(HerosID)
-            {
-            const Items = HerosID['hero_ids'];
-            console.log('ID数:'+Items.length);
-            if(Items.length>0)
-            {
-                bDisp = true;
-                DispList(Items, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);      
-            }
-            }
-            if(!bDisp)
-            {
-            DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
-            }
-        };
-        request.onerror = function(){
-            DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+        const Items = HerosID['hero_ids'];
+        console.log('ID数:'+Items.length);
+        if(Items.length>0)
+        {
+            bDisp = true;
+            DispList(Items, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);      
         }
-        // ヒーローID一覧取得
-        console.log(urlExtIDURL)
-        let requestExt = new XMLHttpRequest();
-        requestExt.open('GET', urlExtIDURL);
-        requestExt.responseType = 'json';
-        requestExt.send();
-        requestExt.onload = function() {
-            const ExtsID = requestExt.response;
-            if(ExtsID)
-            {
-            const Items = ExtsID['extension_ids'];
-            //console.log('ID数:'+Items.length)
-            DispList(Items, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);      
-            }
-            else
-            {
-            DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
-            }
-        };
-        request.onerror = function(){
-            DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
         }
+        if(!bDisp)
+        {
+        DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+        }
+    };
+    request.onerror = function(){
+        DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+    }
+    // ヒーローID一覧取得
+    console.log(urlExtIDURL)
+    let requestExt = new XMLHttpRequest();
+    requestExt.open('GET', urlExtIDURL);
+    requestExt.responseType = 'json';
+    requestExt.send();
+    requestExt.onload = function() {
+        const ExtsID = requestExt.response;
+        if(ExtsID)
+        {
+        const Items = ExtsID['extension_ids'];
+        //console.log('ID数:'+Items.length)
+        DispList(Items, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);      
+        }
+        else
+        {
+        DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+        }
+    };
+    request.onerror = function(){
+        DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+    }
     }
     /////////////////////////////////////////////
     // JSON取得：ヒーロー情報
     function getInfo(reqObj, strTagID, urlText)
     {
-        console.log(urlText)
-        reqObj.open('GET', urlText);
-        reqObj.responseType = 'json';
-        reqObj.send();
-        reqObj.onload = function() {
-            const getInfo = reqObj.response;
-            console.log(strTagID+':'+getInfo.image)
-            let myImage = document.getElementById(strTagID);
-            myImage.src = getInfo.image; // 画像パス
-        };  
+    console.log(urlText)
+    reqObj.open('GET', urlText);
+    reqObj.responseType = 'json';
+    reqObj.send();
+    reqObj.onload = function() {
+        const getInfo = reqObj.response;
+        console.log(strTagID+':'+getInfo.image)
+        let myImage = document.getElementById(strTagID);
+        myImage.src = getInfo.image; // 画像パス
+    };  
     }
 
     /////////////////////////////////////////////
     // JSON取得：ヒーロー情報
     function getHeroInfo(reqObj, strTagID, strHeroID)
     {
-        let urlText = reqHeroInfoURL + strHeroID;
-        getInfo(reqObj, strTagID, urlText);
+    let urlText = reqHeroInfoURL + strHeroID;
+    getInfo(reqObj, strTagID, urlText);
     }
     /////////////////////////////////////////////
     // JSON取得：エクステンション情報
     function getExtInfo(reqObj, strTagID, strExtID)
     {
-        let urlText = reqExtInfoURL + strExtID;
-        getInfo(reqObj, strTagID, urlText);
+    let urlText = reqExtInfoURL + strExtID;
+    getInfo(reqObj, strTagID, urlText);
     }
 
     /////////////////////////////////////////////
     // ユーザーIDの入力領域を表示
     function DispID(strID)
     {
-        //const inputID = document.createElement('input');
-        let inputID = document.getElementById("userID");
-        inputID.setAttribute("id", "userID");
-        inputID.setAttribute("type", "text");
-        inputID.setAttribute("maxlength", "42");
-        inputID.setAttribute("size", "42");
-        inputID.setAttribute("value", strID);
-        inputID.setAttribute("placeholder", "ユーザーID or アドレス(0x)")
-        //id.appendChild(inputID);
+    //const inputID = document.createElement('input');
+    let inputID = document.getElementById("userID");
+    inputID.setAttribute("id", "userID");
+    inputID.setAttribute("type", "text");
+    inputID.setAttribute("maxlength", "42");
+    inputID.setAttribute("size", "42");
+    inputID.setAttribute("value", strID);
+    inputID.setAttribute("placeholder", "ユーザーID or アドレス(0x)")
+    //id.appendChild(inputID);
     }
 
     /////////////////////////////////////////////
     // ヒーローIDをcsv形式で１行表示
     function DispLine(obj)
     {
-        while (header.firstChild) {
-            header.removeChild(header.firstChild);
-        }
-        const myArticle = document.createElement('article');
-        const myH1 = document.createElement('h1');
-        myH1.textContent = "■所持ヒーロー";
-        header.appendChild(myH1);
-        
-        const myPara = document.createElement('p');
-        myPara.textContent = obj['hero_ids'];
-        header.appendChild(myPara);
+    while (header.firstChild) {
+        header.removeChild(header.firstChild);
+    }
+    const myArticle = document.createElement('article');
+    const myH1 = document.createElement('h1');
+    myH1.textContent = "■所持ヒーロー";
+    header.appendChild(myH1);
+    
+    const myPara = document.createElement('p');
+    myPara.textContent = obj['hero_ids'];
+    header.appendChild(myPara);
     }
 
     /////////////////////////////////////////////
     // リストクリア
     function ClearList(objSection)
     {
-        while (objSection.firstChild) {
-            objSection.removeChild(objSection.firstChild);
-        }  
+    while (objSection.firstChild) {
+        objSection.removeChild(objSection.firstChild);
+    }  
     }
 
     /////////////////////////////////////////////
     // ヒーローIDをリスト表示（箇条書き）
     function DispList(Items, strTagBaseID, strHeader, objSection, urlBaseText)
     {
-        // リストクリア
-        ClearList(objSection);
-        
-        const myArticle = document.createElement('article');
-        const myH1 = document.createElement('h1');
-        myH1.textContent = strHeader;
-        myArticle.appendChild(myH1);
-        
-        if(!Items)
-        {
-            const myPara = document.createElement('p');
-            myPara.textContent = "所持していません";
-            myArticle.appendChild(myPara);    
-            objSection.appendChild(myArticle);
+    // リストクリア
+    ClearList(objSection);
+    
+    const myArticle = document.createElement('article');
+    const myH1 = document.createElement('h1');
+    myH1.textContent = strHeader;
+    myArticle.appendChild(myH1);
+    
+    if(!Items)
+    {
+        const myPara = document.createElement('p');
+        myPara.textContent = "所持していません";
+        myArticle.appendChild(myPara);    
+        objSection.appendChild(myArticle);
+    }
+    else
+    {
+        //const Items = obj[strObjID];
+        console.log('ID数:'+Items.length)
+
+        var requests　=　new Array(Items.length);
+        for (let i = 0; i < Items.length; i++)
+        {    
+        //const myList = document.createElement('ul');
+        //const listItem = document.createElement('li');
+        //listItem.textContent = heroes[i];
+        //myList.appendChild(listItem);
+        //myArticle.appendChild(myList);
+
+        let strTagID = strTagBaseID + i;
+        const myImage = new Image();
+        myImage.setAttribute("id", strTagID);
+        myImage.src = "noimage.png";
+        myImage.width = 80; // 横サイズ（px）
+        myImage.height = 80; // 縦サイズ（px）
+        myArticle.appendChild(myImage);
+
+        objSection.appendChild(myArticle);
+
+        requests[i] = new XMLHttpRequest();
+        //getHeroInfo(requests[i], strTagID, heroes[i]);
+        let urlText = urlBaseText + Items[i];
+        getInfo(requests[i], strTagID, urlText);
         }
-        else
-        {
-            //const Items = obj[strObjID];
-            console.log('ID数:'+Items.length)
+    }
+    }
 
-            var requests　=　new Array(Items.length);
-            for (let i = 0; i < Items.length; i++)
-            {    
-            //const myList = document.createElement('ul');
-            //const listItem = document.createElement('li');
-            //listItem.textContent = heroes[i];
-            //myList.appendChild(listItem);
-            //myArticle.appendChild(myList);
-
-            let strTagID = strTagBaseID + i;
-            const myImage = new Image();
-            myImage.setAttribute("id", strTagID);
-            myImage.src = "noimage.png";
-            myImage.width = 80; // 横サイズ（px）
-            myImage.height = 80; // 縦サイズ（px）
-            myArticle.appendChild(myImage);
-
-            objSection.appendChild(myArticle);
-
-            requests[i] = new XMLHttpRequest();
-            //getHeroInfo(requests[i], strTagID, heroes[i]);
-            let urlText = urlBaseText + Items[i];
-            getInfo(requests[i], strTagID, urlText);
+    async function loadImgURL(cid, mime, limit) {
+        if (cid == "" || cid == null || cid == undefined) {
+            return;
+        }
+        for await (const file of ipfs.get(cid)) {
+            if (file.size > limit) {
+                return;
+            }
+            const content = [];
+            if (file.content) {
+                for await(const chunk of file.content) {
+                    content.push(chunk);
+                }
+                return URL.createObjectURL(new Blob(content, {type: mime}));
             }
         }
     }
