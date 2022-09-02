@@ -333,8 +333,10 @@
 
     function dispFortune(userID)
     {
-    // 今日の運勢表示
+    // リストクリア
     let today = document.getElementById("today_fortune");
+    ClearList(today);
+    // 今日の運勢表示
     today.setAttribute("style", "display:block;");
     const ftLink = document.createElement('a');
     ftLink.href = "https://k0j1.github.io/takahara-books.com/public_html/Web3.0/MCH_Omikuji_Result.html?id=" + userID;
@@ -372,9 +374,14 @@
     // ユーザー情報取得
     console.log(urlUserInfoURL)
     let request = new XMLHttpRequest();
-    request.open('GET', urlUserInfoURL);
-    request.responseType = 'json';
-    request.send();
+    try {
+        request.open('GET', urlUserInfoURL);
+        request.responseType = 'json';
+        request.send();
+    } catch (e) {
+        DispList(null, "heroID_", "❌所持ヒーロー", data, reqHeroInfoURL);
+        DispList(null, "extsID_", "❌所持エクステ", dataExt, reqExtInfoURL);
+    }
     request.onload = function()
     {
         const UserInfo = request.response;
@@ -401,9 +408,20 @@
     // ヒーローID一覧取得
     console.log(urlHeroIDURL)
     let request = new XMLHttpRequest();
-    request.open('GET', urlHeroIDURL);
-    request.responseType = 'json';
-    request.send();
+    try {
+        request.open('GET', urlHeroIDURL);
+        request.responseType = 'json';
+        request.onreadystatechange = function()
+        {
+        console.log("request.readyState="+request.readyState);
+        console.log("request.status="+request.status);
+        if(request.readyState==4 && request.status==0)
+        DispList(null, "heroID_", "❌所持ヒーロー", data, reqHeroInfoURL);
+        }
+        request.send();
+    } catch (e) {
+        DispList(null, "heroID_", "❌所持ヒーロー", data, reqHeroInfoURL);
+    }
     request.onload = function()
     {
         var bDisp = false; 
@@ -415,38 +433,43 @@
         if(Items.length>0)
         {
             bDisp = true;
-            DispList(Items, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);      
+            let strTitle = "◉所持ヒーロー(" + Items.length + ")";
+            DispList(Items, "heroID_", strTitle, data, reqHeroInfoURL);
         }
         }
         if(!bDisp)
         {
-        DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+        DispList(null, "heroID_", "❌所持ヒーロー", data, reqHeroInfoURL);
         }
     };
     request.onerror = function(){
-        DispList(null, "heroID_", "■所持ヒーロー", data, reqHeroInfoURL);
+        DispList(null, "heroID_", "❌所持ヒーロー", data, reqHeroInfoURL);
     }
-    // ヒーローID一覧取得
+    // エクステンションID一覧取得
     console.log(urlExtIDURL)
     let requestExt = new XMLHttpRequest();
-    requestExt.open('GET', urlExtIDURL);
-    requestExt.responseType = 'json';
-    requestExt.send();
+    try {
+        requestExt.open('GET', urlExtIDURL);
+        requestExt.responseType = 'json';
+        requestExt.send();
+    } catch (e) {
+        DispList(null, "extsID_", "❌所持エクステ", dataExt, reqExtInfoURL);
+    }
     requestExt.onload = function() {
         const ExtsID = requestExt.response;
         if(ExtsID)
         {
         const Items = ExtsID['extension_ids'];
-        //console.log('ID数:'+Items.length)
-        DispList(Items, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);      
+        let strTitle = "◉所持エクステ(" + Items.length + ")";
+        DispList(Items, "extsID_", strTitle, dataExt, reqExtInfoURL);
         }
         else
         {
-        DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+        DispList(null, "extsID_", "❌所持エクステ", dataExt, reqExtInfoURL);
         }
     };
     request.onerror = function(){
-        DispList(null, "extsID_", "■所持エクステ", dataExt, reqExtInfoURL);
+        DispList(null, "extsID_", "❌所持エクステ", dataExt, reqExtInfoURL);
     }
     }
     /////////////////////////////////////////////
