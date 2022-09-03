@@ -292,12 +292,6 @@
         } else {
             strErrText = "MetaMask接続できません";
         }
-        let errConnectText = document.getElementById('.errConnectText');
-        if(errConnectText)
-        {
-            errConnectText.setAttribute("style", "color:white;");
-            errConnectText.textContent(strErrText);
-        }
         // 接続ボタン設定
         connectButton.addEventListener('click', function(event)
         {
@@ -308,22 +302,21 @@
         });
         // URLを取得
         const userID = getUserID();
-        let inputUserID = document.getElementById("userID");
-        inputUserID.value = userID;
+        if(userID != null && userID.length > 0)
+        {
+            let inputUserID = document.getElementById("userID");
+            inputUserID.value = userID;
+        }
     }
 
     ////////////////////////////////////////////
     // URLからユーザーID取得
     function getUserID()
     {
-    let url = new URL(window.location.href);
-    let params = url.searchParams;
-    let nUserID = params.get('id');
-    if(nUserID==null)
-    {
-        nUserID = Math.floor(Math.random() * 100000);
-    }
-    return nUserID;
+        let url = new URL(window.location.href);
+        let params = url.searchParams;
+        let nUserID = params.get('id');
+        return nUserID;
     }
 
     /////////////////////////////////////////////
@@ -334,9 +327,11 @@
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
         console.log(account);
-        //showAccount.innerHTML = account;
-        let element = document.getElementById('userID');
-        element.setAttribute("value", account);
+        if(userID != null && userID.length > 0)
+        {
+            let inputUserID = document.getElementById("userID");
+            inputUserID.value = account;
+        }
     }
     catch (err)
     {
