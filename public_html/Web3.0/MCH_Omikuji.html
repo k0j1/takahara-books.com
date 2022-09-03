@@ -327,7 +327,7 @@
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
         console.log(account);
-        if(userID != null && userID.length > 0)
+        if(account != null && account.length > 0)
         {
             let inputUserID = document.getElementById("userID");
             inputUserID.value = account;
