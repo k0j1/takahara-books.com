@@ -737,32 +737,45 @@
 
     // URLを取得
     const userID = getUserID();
-    console.log('userID:'+userID);
+    changeLink(userID);
 
     ////////////////////////////////////////////
     // URLからユーザーID取得
     function getUserID()
     {
-    let url = new URL(window.location.href);
-    let params = url.searchParams;
-    let nUserID = params.get('id');
-    if(nUserID==null)
-    {
-        nUserID = Math.floor(Math.random() * 100000);
-    }
-    return nUserID;
+        let url = new URL(window.location.href);
+        let params = url.searchParams;
+        let nUserID = params.get('id');
+        if(nUserID==null)
+        {
+            nUserID = Math.floor(Math.random() * 100000);
+        }
+        return nUserID;
     }
     function getRandData()
     {
-    //今日の日付データを変数hidukeに格納
-    var date = new Date();
-    //年・月・日・曜日を取得する
-    var year = date.getFullYear()+1;
-    var month = date.getMonth()+1;
-    var week = date.getDay()+1;
-    var day = date.getDate()+1;
-    // ユーザーIDから日付のランダム値を生成
-    return Math.floor(userID*year*month*day*week);
+        //今日の日付データを変数hidukeに格納
+        var date = new Date();
+        //年・月・日・曜日を取得する
+        var year = date.getFullYear()+1;
+        var month = date.getMonth()+1;
+        var week = date.getDay()+1;
+        var day = date.getDate()+1;
+        // ユーザーIDから日付のランダム値を生成
+        return Math.floor(userID*year*month*day*week);
+    }
+    ////////////////////////////////////////////
+    // 戻るリンクにID追加
+    function changeLink(userID)
+    {
+        var elemLink = document.getElementById("back_btn");
+        console.log('userID:'+userID+'('+userID.length+')');
+        if(userID.length > 0)
+        {
+            console.log(elemLink.href);
+            elemLink.href = "https://codepen.io/k0j1/full/eYMMQWM?id=" + userID;
+            console.log(elemLink.href);
+        }
     }
 
     // ランダムな値を得る
@@ -1610,18 +1623,18 @@
         //document.getElementById("hero_rarity").apend(); += strAddClass;
         };
     
-        urlText = "https://www.mycryptoheroes.net/metadata/hero/" + hInfos[nHIdx].imgID + "0001";
-        console.log(urlText)
-        let request2 = new XMLHttpRequest();
-        request2.open('GET', urlText);
-        request2.responseType = 'json';
-        request2.send();
-        request2.onload = function()
-        {
-        const HeroInfo = request2.response;
-        console.log("HeroInfo.name="+HeroInfo.attributes.rarity);
-        console.log("HeroInfo.image="+HeroInfo.image);
-        }
+        //urlText = "https://www.mycryptoheroes.net/metadata/hero/" + hInfos[nHIdx].imgID + "0001";
+        //console.log(urlText)
+        //let request2 = new XMLHttpRequest();
+        //request2.open('GET', urlText);
+        //request2.responseType = 'json';
+        //request2.send();
+        //request2.onload = function()
+        //{
+        //    const HeroInfo = request2.response;
+        //    console.log("HeroInfo.name="+HeroInfo.attributes.rarity);
+        //    console.log("HeroInfo.image="+HeroInfo.image);
+        //}
     }
     </script>
 </body>

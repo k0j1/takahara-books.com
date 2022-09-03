@@ -284,28 +284,46 @@
 
     function init()
     {
-    // Metamaskチェック
-    let strErrText = "";
-    if (typeof window.ethereum !== 'undefined') {
-        console.log('MetaMask is installed!');
-        strErrText = "MetaMask接続可能";
-    } else {
-        strErrText = "MetaMask接続できません";
+        // Metamaskチェック
+        let strErrText = "";
+        if (typeof window.ethereum !== 'undefined') {
+            console.log('MetaMask is installed!');
+            strErrText = "MetaMask接続可能";
+        } else {
+            strErrText = "MetaMask接続できません";
+        }
+        let errConnectText = document.getElementById('.errConnectText');
+        if(errConnectText)
+        {
+            errConnectText.setAttribute("style", "color:white;");
+            errConnectText.textContent(strErrText);
+        }
+        // 接続ボタン設定
+        connectButton.addEventListener('click', function(event)
+        {
+            // 今日の運勢表示
+            let today = document.getElementById("today_fortune");
+            today.setAttribute("style", "display:block;");
+            connectMetaMask();
+        });
+        // URLを取得
+        const userID = getUserID();
+        let inputUserID = document.getElementById("userID");
+        inputUserID.value = userID;
     }
-    let errConnectText = document.getElementById('.errConnectText');
-    if(errConnectText)
+
+    ////////////////////////////////////////////
+    // URLからユーザーID取得
+    function getUserID()
     {
-        errConnectText.setAttribute("style", "color:white;");
-        errConnectText.textContent(strErrText);
+    let url = new URL(window.location.href);
+    let params = url.searchParams;
+    let nUserID = params.get('id');
+    if(nUserID==null)
+    {
+        nUserID = Math.floor(Math.random() * 100000);
     }
-    // 接続ボタン設定
-    connectButton.addEventListener('click', function(event)
-    {
-        // 今日の運勢表示
-        let today = document.getElementById("today_fortune");
-        today.setAttribute("style", "display:block;");
-        connectMetaMask();
-    });
+    return nUserID;
     }
 
     /////////////////////////////////////////////
