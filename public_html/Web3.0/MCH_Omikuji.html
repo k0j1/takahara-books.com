@@ -235,8 +235,8 @@
         <div id="user_id">
         <div class="userid_box">
             <div class="userid_inner">
-            <input id="userID" type="text" maxlength=42 size=42 placeholder=" ">
-            <div class="userid_string">ユーザーID or アドレス(0x)</div>
+                <input type="image" src="https://www.takahara-books.com/Image/MCH/kensaku.png" alt="検索" onclick="getIDs()" width="80px"/>
+                <div class="userid_string">ユーザーID or アドレス(0x)</div>
             </div>
         </div>
         <input type="button" value="検索" onclick="getIDs()" />
@@ -353,7 +353,11 @@
     {
     let element = document.getElementById('userID');
     console.log("UserID length : "+element.value.length);
-    if(element.value.length < 10)
+    if(element.value.length <= 2)
+    {
+        alert("ユーザーIDかETHアドレスを入力してください");
+    }
+    else if(element.value.length < 10)
     {
         // ユーザーIDでの検索
         let urlHeroIDURL = reqHeroIDURL + element.value;
