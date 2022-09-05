@@ -1,3 +1,12 @@
+// ヒーロー情報（構造体）
+function heroInfo(ID, Quot1, Quot2)
+{
+  this.imgID = ID;
+  this.strQuot1 = Quot1;
+  this.strQuot2 = Quot2;
+}
+
+// ヒーロ情報全て取得
 function getHeroInfos()
 {
   let n=0;
