@@ -18,7 +18,6 @@ jobs:
       - name: "Output"
         run: |
           pwd
-          cd takahara-books.com
           echo github.actor
           echo github.actor_id
           echo github.event_name
