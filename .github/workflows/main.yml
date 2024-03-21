@@ -1,4 +1,4 @@
-name: "てst"
+name: "GitHub Action Test"
 on: 
   workflow_dispatch:
     inputs:
