@@ -15,6 +15,11 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
+      - name: "checkout"
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PH_PAT }} 
+          ref: main
       - name: "Check branch is existing"
         run: |
           git config user.name "k0j1"
