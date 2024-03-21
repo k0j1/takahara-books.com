@@ -18,15 +18,15 @@ jobs:
       - name: "Output"
         run: |
           pwd
-          echo github.actor
-          echo github.actor_id
-          echo github.event_name
-          echo github.head_ref
-          echo github.job
-          echo github.path
-          echo github.ref
-          echo github.ref_name
-          echo github.ref_type
+          echo ${{ github.actor }}
+          echo ${{ github.actor_id }}
+          echo ${{ github.event_name }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.job }}
+          echo ${{ github.path }}
+          echo ${{ github.ref }}
+          echo ${{ github.ref_name }}
+          echo ${{ github.ref_type }}
           echo ${{ github.event.inputs.branch_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_NAME }}
