@@ -9,7 +9,7 @@ on:
         default: "main"
 
 jobs:
-  create_yml_pull_request:
+  Check_Branch_Test:
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
@@ -17,9 +17,12 @@ jobs:
     steps:
       - name: "Check branch is existing"
         run: |
+          git config user.name "k0j1"
+          git config user.email "k0j123t@gmail.com"
           git fetch origin ${{ github.event.inputs.branch_name }}
       - name: "Output"
         run: |
+          pwd
           cd takahara-books.com
           echo ${{ github.event.inputs.branch_name }}
         env:
