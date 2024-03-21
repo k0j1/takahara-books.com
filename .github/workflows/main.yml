@@ -9,26 +9,25 @@ on:
         default: "main"
 
 jobs:
-  Check_Branch_Test:
+  Display_github_value:
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
     steps:
-      - name: "checkout"
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PH_PAT }} 
-          ref: main
-      - name: "Check branch is existing"
-        run: |
-          git config user.name "k0j1"
-          git config user.email "k0j123t@gmail.com"
-          git fetch origin ${{ github.event.inputs.branch_name }}
       - name: "Output"
         run: |
           pwd
           cd takahara-books.com
+          echo github.actor
+          echo github.actor_id
+          echo github.event_name
+          echo github.head_ref
+          echo github.job
+          echo github.path
+          echo github.ref
+          echo github.ref_name
+          echo github.ref_type
           echo ${{ github.event.inputs.branch_name }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_NAME }}
