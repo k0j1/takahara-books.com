@@ -1,0 +1,26 @@
+name: "てst"
+on: 
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        type: string
+        description: input branch
+        required: true
+        default: "main"
+
+jobs:
+  create_yml_pull_request:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: "Check branch is existing"
+        run: |
+          git fetch origin ${{ github.event.inputs.branch_name }}
+      - name: "Output"
+        run: |
+          cd takahara-books.com
+          echo ${{ github.event.inputs.branch_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PH_PAT }}
