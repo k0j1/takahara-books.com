@@ -1,12 +1,6 @@
 name: "GitHub Action Test"
 on: 
   workflow_dispatch:
-    inputs:
-      branch_name:
-        type: string
-        description: input branch
-        required: true
-        default: "main"
 
 jobs:
   Display_github_value:
