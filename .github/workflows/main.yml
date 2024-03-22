@@ -27,5 +27,7 @@ jobs:
           echo ${{ github.ref_name }}
           echo ${{ github.ref_type }}
           echo ${{ github.event.inputs.branch_name }}
+          echo ${{ secrets.SECRET_NAME }}
+          echo ${{ secrets.PH_PAT }}
         env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_NAME }}
+          GITHUB_TOKEN: ${{ secrets.PH_PAT }}
