@@ -9,11 +9,6 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
-      - name: "checkout"
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PH_PAT }} 
-          ref: ${{ github.ref_name }}
       - name: "Output"
         run: |
           pwd
@@ -30,4 +25,4 @@ jobs:
           echo ${{ secrets.SECRET_NAME }}
           echo ${{ secrets.PH_PAT }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_NAME }}
